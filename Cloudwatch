@@ -1,0 +1,29 @@
+  ##Cloudwatch Link#####   https://prasaddomala.com/2020/03/22/install-and-configure-unified-cloudwatch-agent/
+
+Command line installation on Linux
+# Download Agent
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/linux/amd64/latest/AmazonCloudWatchAgent.zip
+# Unzip Package
+unzip AmazonCloudWatchAgent.zip
+# Install Package
+sudo ./install.sh 
+Command line installation on Windows
+# Download File
+https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/AmazonCloudWatchAgent.zip
+# Unzip Package
+unzip AmazonCloudWatchAgent.zip
+# Install Package
+./install.ps1 
+Create configuration file
+# Start config wizard
+cd /opt/aws/amazon-cloudwatch-agent/bin
+./amazon-cloudwatch-agent-config-wizard
+
+# Config file location
+/opt/aws/amazon-cloudwatch-agent/bin/config.json 
+Start & stop CloudWatch Agent
+# Linux
+./amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c ssm:AmazonCloudWatch-linux -s
+
+# Windows
+amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c ssm:AmazonCloudWatch-windows -s 
