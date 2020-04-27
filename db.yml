@@ -1,0 +1,18 @@
+---
+- hosts: all
+  tasks:
+    - name: db create
+      mysql_db:
+        name: testdb2
+        state: present
+    - name: backup testdb
+      mysql_db:
+         name: testdb
+         state: dump
+         target: /root/testdb.sql.gz 
+    - name: user create
+      mysql_user:
+        name: test1
+        password: test123
+        priv: '*.*:ALL'
+        state: present
