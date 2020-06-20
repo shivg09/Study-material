@@ -1,0 +1,18 @@
+hostname=$(hostname)
+Ip_address=$(ifconfig |grep inet|grep 192 |awk '{print $2}')
+uptime=$(uptime |awk '{print $3}')
+os_type=$(uname -r)
+
+#echo "HOSTNAME, Ip_address, uptime, os_type" >> abc.csv
+echo "$HOSTNAME, $Ip_address, $uptime, $os_type" >> abc.csv
+
+for i in `cat /root/hostlist`;
+do
+rhostname=$(ssh $i hostname)
+rIp_address=$(ssh $i ifconfig |grep inet |grep 192|awk '{print $2}')
+ruptime=$(ssh $i uptime |awk '{print $3}')
+ros_type=$(ssh $i uname -r)
+
+#echo "rHOSTNAME, rIp_address, ruptime, ros_type" >> abc.csv
+echo "$rhostname, $rIp_address, $ruptime, $ros_type" >> abc.csv
+done
