@@ -1,0 +1,7 @@
+#!/bin/bash
+find /var/log -name "messages-*" -type f -mtime +5 -delete
+for i in `cat /root/hostlist`;
+do
+ssh $i find /var/log -name "messages-*" -type f -mtime +5 -delete
+
+done
