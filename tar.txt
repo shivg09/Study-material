@@ -1,0 +1,2 @@
+tar -rvf bk.tar.gz test  (how to add test file in tar bundle)
+tar --extract --file=bk2.tar.gz test  (extract single file)
