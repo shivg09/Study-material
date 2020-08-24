@@ -1,0 +1,4 @@
+##How to enter perticular Directory
+#!/bin/bash
+cd /home/d1
+exec bash
