@@ -1,0 +1,22 @@
+How to run remote script to take backup on remote server
+Scripting name= .backup.sh in server 192.168.153.128
+Remote server = 192.168.153.129 where script to be run and backup on /home partition
+#!/bin/bash
+hostname=$(hostname -s)
+backup="/opt"
+#where to backup
+dest="/home/backup"
+day=$(date +%A)
+hostname=$(hostname -s)
+archive="$hostname-$day.tar.gz"
+tar -cvzf $dest-$archive $backup
+echo "backup finished"
+echo "$hostname"
+
+
+Crontab Entry in 192.168.153.128
+Crontab –e
+* * * * * ssh root@192.168.153.129 "bash -s" < /root/./backup.sh
+
+
+
