@@ -1,0 +1,12 @@
+https://redhatlinux.guru/2018/06/01/pacemaker-enable-maintenance-mode-or-freeze-cluster/
+
+https://redhatlinux.guru/2018/09/20/pacemaker-create-location-constraints/
+https://fibrevillage.com/sysadmin/317-pacemaker-and-pcs-on-linux-example-cluster-creation-add-a-node-to-cluster-remove-a-node-from-a-cluster-desctroy-a-cluster
+
+https://prefetch.net/references/pacemaker/
+
+pcs constraint location fence1 prefers node2
+
+pcs constraint list --full
+pcs constraint remove cli-ban-test_sg-on-server01-cpn
+pcs cluster standby [--all] [node] [...]
