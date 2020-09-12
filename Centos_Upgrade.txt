@@ -1,0 +1,21 @@
+upgrade from centos 6.5 to 7.8 or any version
+upgrade from centos 7.0 to 7.8 or any version
+
+Centos 6.5
+cat /etc/redhat-release (check os version)
+mkdir /opt/localimage (create dir for iso)
+mount -o loop /root/CentOS-7-x86_64-DVD-2003.iso /opt/localimage
+then below file
+vim /etc/yum.repos.d/local.repo
+[local]
+name=myrepo
+baseurl=file:///opt/localimage
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 (here gpgkey path of os version which we whant to upgrade (exam 6.2 to 7.8 then gpg me centos7 not centos6.)
+
++++++
+ and then
+yum clean all
+yum update
+reboot
