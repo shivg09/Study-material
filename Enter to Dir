@@ -12,3 +12,11 @@ for file in `find /tmp/ -name "a*.txt"`;do
 echo "$file"
 rm -rf $file
 done
+#########################
+
+[root@localhost ~]# cat filelist.sh
+#!/bin/bash
+for file in `find /etc/* -name "*.*"`;do
+echo "$file"
+cp -r $file /tmp
+done
