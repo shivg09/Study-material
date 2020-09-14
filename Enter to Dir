@@ -2,3 +2,13 @@
 #!/bin/bash
 cd /home/d1
 exec bash
+
+######################
+file search and delete from directory
+
+[root@localhost ~]# cat filelist.sh
+#!/bin/bash
+for file in `find /tmp/ -name "a*.txt"`;do
+echo "$file"
+rm -rf $file
+done
