@@ -1,0 +1,26 @@
+#!/bin
+username=mayur1
+password=mayur123
+for user in $username
+do
+useradd $user
+echo $password | passwd --stdin $user
+done
+
+
+###################################
+
+more then one user
+
+[root@localhost ~]# cat useradd.sh
+#!/bin/bash
+userfile=/tmp/userlist
+useradd=$(cat /tmp/userlist |tr 'A-Z' 'a-z')
+password=$username@123
+for user in $useradd
+do
+useradd -r  $user
+echo $password | passwd --stdin $user
+done
+
+echo "$(wc -l /tmp/userlist) users have been created"
