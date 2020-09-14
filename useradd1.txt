@@ -19,7 +19,7 @@ useradd=$(cat /tmp/userlist |tr 'A-Z' 'a-z')
 password=$username@123
 for user in $useradd
 do
-useradd -r  $user
+useradd   $user
 echo $password | passwd --stdin $user
 done
 
