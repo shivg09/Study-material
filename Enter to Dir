@@ -20,3 +20,17 @@ for file in `find /etc/* -name "*.*"`;do
 echo "$file"
 cp -r $file /tmp
 done
+###################################
+
+[root@localhost ~]# cat filelist.sh
+#!/bin/bash
+for file in $(seq 2 2 20);do
+echo "$file"
+done
+
+################
+
+for file in {1..15};do
+echo "$file"
+done
+####################################################
