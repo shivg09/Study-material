@@ -1,0 +1,15 @@
+[root@localhost ~]# cat string.sh
+#USE OF FILE EMPTY OR NOT
+#!/bin/bash
+echo "enter the string"
+read a
+
+if [ ! -s $a ]
+then
+echo "string is empty"
+else
+echo "string is not empty"
+fi
+[root@localhost ~]#
+
+############################################
