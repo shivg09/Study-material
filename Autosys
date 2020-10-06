@@ -1,0 +1,75 @@
+https://www.bing.com/videos/search?q=autosys+gui&&view=detail&mid=F4FAF4F167DA0216B834F4FAF4F167DA0216B834&&FORM=VRDGAR
+https://www.bing.com/videos/search?q=autosys+gui&&FORM=VDVVXX
+https://www.youtube.com/watch?v=TUEochhndHk&feature=emb_rel_pause ( Installation)
+https://www.autosysguide.com/autosys-jil-tutorial/ 
+https://www.autosysguide.com/autosys-commands-list-examples/
+
+https://www.viralpatel.net/autosys-create-manage-jobs-autosys-scheduler-job-monitoring-autosys/
+
+https://www.youtube.com/watch?v=3scD3llibJA  (Informatica)
+
+
+every 30 minutes
+
+insert_job: my-job-for-specific-mins
+job_type: c
+command: date
+machine: my-host
+permission: mx
+n_retrys: 0
+date_conditions: 1
+days_of_week: mo,tu,we,th,fr
+start_mins: "05,35"
+description: "Test specific mins of hour"
+std_out_file: /var/tmp/job-name.out
+std_err_file: /var/tmp/job-name.out
+alarm_if_fail: 1
+timezone: London
+
+++++++++++
+insert_job: template job_type: c 
+box_name: box1
+command: ls -l
+machine: localhost
+owner: lyota01@TANT-A01
+permission: gx,ge,wx,we,mx,me
+date_conditions: 1
+days_of_week: all
+start_times: 0,30
+
+https://www.thetopsites.net/article/54868083.shtml
+
+You can give the attribute start_mins for every 10 mins with the run_window. You can schedule jobs for every minute but you do not have it in seconds.
+date_conditions: 1
+
+days_of_week: all
+
+start_mins: 00,10,20,30,40,50
+
+run_window: "16:00-17:00"
+
+timezone: india
+
++++++
+
+
+insert_job: template job_type: c 
+box_name: box1
+command: <xxx>
+machine: <hostname>
+owner: <username>
+permission: gx,ge
+date_conditions: 1
+days_of_week: all
+start_mins: 0,30
+run_window: "16:00-17:00
+
+https://community.broadcom.com/communities/community-home/digestviewer/viewthread?MID=803562
+I have given the below conditions to run every 4 hours during those days, but the problem is the job is running at 01:00, 05:00 and 08:58 on Wednesdays. I expect the job to run at those hours on Thursday and not Wednesday
+ 
+insert_job: file_watcher.0000.000 job_type: BOX
+date_conditions: 1
+days_of_week: we,th
+start_times: "09:00,13:00,17:00,21:00,01:00,05:00,08:59"
+run_window: "09:00 - 08:59"
+ 
