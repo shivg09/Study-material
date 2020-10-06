@@ -1,0 +1,14 @@
+#!/bin/bash
+file=/opt/kk/ll
+#file=/opt/kk/abc.txt
+if [ -e $file ]
+then
+if [ ! -s $file ]
+then
+echo "file is empty"
+else
+echo "file is not empty"
+fi
+else
+echo "file not available"
+fi
