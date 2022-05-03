@@ -1,0 +1,49 @@
+version: '3'
+services:
+ 
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - vol:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATATABASE=test
+    ports:
+      - 33006:3306
+      
+  tomcatserver:
+    image: oupula/tomcat9_jdk8
+    ports:
+      - "38080:8080"
+    
+
+volumes:
+   vol:
+=====================================
+
+
+version: '3'
+services:
+ 
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - /home/kk/ll:/var/lib/mysql
+      - ./mysql-dump:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATATABASE=test
+    ports:
+      - 33006:3306
+      
+  tomcatserver:
+    image: oupula/tomcat9_jdk8
+    ports:
+      - "38080:8080"
+    
+
+        #volumes:
+        #vol:
+
+
