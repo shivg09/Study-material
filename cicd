@@ -1,0 +1,28 @@
+SSH SERVER(PUBLIC OVER SSH)
+
+Transfer Set
+Source files
+
+webapp/target/*.war
+================
+remove prifix
+webapp/target
+
+============
+remote dir
+//opt//docker
+
+=============
+cd /opt/docker; docker build -t valocity_demo .
+
+===================
+next ssh job create container
+
+docker run  -p 8080:8080 --name valocity_demo valocity_demo
+=======================
+
+[root@Docker-15 docker]# cat Dockerfile 
+From tomcat:8-jre8
+
+COPY ./webapp.war /usr/local/tomcat/webapps
+
