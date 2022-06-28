@@ -1,0 +1,45 @@
+Apache server connection with Azure App Service
+
+<VirtualHost *:80>
+ 
+    ServerName testing-buzzdocker.academiaerp.com
+    ServerAlias testing-buzzdocker.academiaerp.com
+ 
+    Redirect / https://testing-buzzdocker.academiaerp.com/
+ 
+</VirtualHost>
+ 
+<VirtualHost *:443>
+ 
+    ServerName testing-buzzdocker.academiaerp.com
+    ServerAlias testing-buzzdocker.academiaerp.com
+ 
+    ErrorLog /var/log/apache2/app-testing-buzzdocker.academiaerp.com.error.log
+ 
+    LogLevel debug rewrite:trace8
+    CustomLog /var/log/apache2/app-testing-buzzdocker.academiaerp.com.access.log combined
+ 
+ 
+    Protocols h2 h2c http/1.1
+ 
+    DocumentRoot /var/www/html/testing_buzz/
+ 
+ 
+    SSLProxyEngine on
+ 
+    ProxyPassMatch "^/rest/(.*)$"                                               "https://shivpetsample1.azurewebsites.net/testing_buzz/rest/$1"
+    ProxyPassMatch "^/oauth/(.*)$"                                              "https://shivpetsample1.azurewebsites.net/testing_buzz/oauth/$1"
+    ProxyPassMatch "^/logout"                                                   "https://shivpetsample1.azurewebsites.net/testing_buzz/logout"
+    ProxyPassMatch "^/*.jsp/(.*)$"                                              "https://shivpetsample1.azurewebsites.net/testing_buzz/*.jsp/$1"
+    ProxyPassMatch "^/resources/images/uploads/PERSON/(.*)$"                    "https://shivpetsample1.azurewebsites.net/testing_buzz/resources/images/uploads/PERSON/$1"
+    ProxyPassMatch "^/resources/images/uploads/GALLERY_IMAGES/(.*)$"            "https://shivpetsample1.azurewebsites.net/testing_buzz/resources/images/uploads/GALLERY_IMAGES/$1"
+ 
+    ProxyPassReverse / https://shivpetsample1.azurewebsites.net/testing_buzz/
+ 
+    SSLCertificateFile /etc/apache2/ssl/server.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/server.key
+    SSLCertificateChainFile /etc/apache2/ssl/server.csr
+</VirtualHost>
+~                                                                                                                                                                        
+~                
+
