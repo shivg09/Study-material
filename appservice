@@ -1,0 +1,129 @@
+App service
+To view the logs -  search kudu
+
+https://shivpetsample1.azurewebsites.net/testing_buzz/
+
+az account show
+   az account set --subscription '930d411e-1471-4b88-99a3-ddb00ac3bbc7'
+   az account show
+   az webapp log config --name shivPetSample1 --resource-group webapp-rg --docker-container-logging filesystem
+  az webapp log tail --name shivPetSample1 --resource-group webapp-rg
+
+From graphical user interface log checking
+https://shivpetsample1.scm.azurewebsites.net/api/logstream
+or
+https://shivpetsample1.scm.azurewebsites.net/api/logs/docker
+
+
+===
+
+Docker image mysql
+sudo docker run -it -p 13306:3306 --name mysqlcont04 -e MYSQL_ROOT_PASSWORD=s3r0s0ft -e MYSQL_LOG_DIR=/var/log/mysql mysql:8
+
+sudo docker exec -it mysqlcont04 /bin/bash
+
+mysql -u root --host=172.17.0.3 --password -P3306 (conainer access from local host)
+
+Command for importing the database in container ip (172.17.0.3) container port 3306
+
+pv testing_buzz_21.sql |mysql --user=root --host=172.17.0.3 --password -P3306
+
+=================================
+
+App Service
+
+Docker file which is given by Surendra
+Added some parameter in JAVA_OPTS.  
+(Parameter name- -XX:+CMSClassUnloadingEnabled -noverify"
+
+ Made changes in database.properties
+ 
+Man & audit both line
+
+autoReconnect=true&autoReconnectForPools=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+
+autoReconnect=true&autoReconnectForPools=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
+
+Increased CPU/RAM in app service from S1 to P2V3
+  Public ip database.properties
+Bcprov-jdk14-1.38.jar  (removed jar file from lib)
+
+
+==================================
+
+WEBSITES_CONTAINER_START_TIME_LIMIT
+VALUE 1800
+
+String (only database name should be mention rest of bydefault)
+
+Database=au; Data Source=mysql-prod001.mysql.database.azure.com; User Id=mysqladmin@mysql-prod001; Password={password@123}
+
+Database VM  port  3306 allow for everyone
+
+=============
+
+rgi storage name= rgistorage-1 
+storage name  -  rgistoragefortesting
+fileshare  rgifileshare
+mount point=  /opt/serosoft/v2_upload
+
+
+
+=========================
+
+Redis 
+Redis name :- serosoft
+Redis hostname :  serosoft.redis.cache.windows.net
+Port :   Non-SSL port (6379) disabled
+=================
+
+Web App connection with Apache web server in ubuntu VM.
+https://www.digitalocean.com/community/tutorials/how-to-use-apache-as-a-reverse-proxy-with-mod_proxy-on-ubuntu-16-04
+
+===============
+Redis configuration in xml file (File name- serosoft-academia-security.xml)
+
+<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+<property name="hostName" value="serosoft.redis.cache.windows.net"/>
+<property name="port" value="6379"/>
+<!--  
+    <property name="password" value=""/>
+    <property name="database" value="1"/>  -->
+</bean>
+================================
+Below is correct one redis setting
+
+<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+<property name="hostName" value="serosoft.redis.cache.windows.net"/>
+<property name="port" value="6379"/>
+<property name="password" value="xKJqIgMGuV67BTuW3nPEsNk5X2smpBxu9AzCaGWoOVE="/>
+<property name="database" value="1"/>
+</bean>
+====================
+—-------------------------------
+
+App service storage mount
+
+if [ ! -d "/etc/smbcredentials" ]; then
+sudo mkdir /etc/smbcredentials
+fi
+if [ ! -f "/etc/smbcredentials/rgistoragefortesting.cred" ]; then
+    sudo bash -c 'echo "username=rgistoragefortesting" >> /etc/smbcredentials/rgistoragefortesting.cred'
+    sudo bash -c 'echo "password=h2e7k7dOZY6bZ3DrgdghRu9vzSSxJ8Up4NIncT4HMlfaTTu1iQY8eyBksX/7kUzAG1VlLMglxm62oyGCKqxoKQ==" >> /etc/smbcredentials/rgistoragefortesting.cred'
+fi
+sudo chmod 600 /etc/smbcredentials/rgistoragefortesting.cred
+
+sudo bash -c 'echo "//rgistoragefortesting.file.core.windows.net/fileshare1 /opt/serosoft/v2_uploads cifs nofail,credentials=/etc/smbcredentials/rgistoragefortesting.cred,dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30" >> /etc/fstab'
+sudo mount -t cifs //rgistoragefortesting.file.core.windows.net/fileshare1 /opt/serosoft/v2_uploads -o credentials=/etc/smbcredentials/rgistoragefortesting.cred,dir_mode=0777,file_mode=0777,serverino,nosharesock,actimeo=30
+========================================================================================
+
+App service login
+Docker and azure cli required on local system
+
+Az login
+sudo docker login regression02.azurecr.io(acr servername) --username Regression02(acr username)
+Docker build -t reg2.img6 .
+Docker tag reg2.img6 regression02.azurecr.io/reg2.img6 
+sudo docker push regression02.azurecr.io/reg2-img6
+=====
+
