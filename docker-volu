@@ -1,0 +1,3 @@
+docker run -d --name webapp1 --mount source=a1,destination=/usr/share/nginx/html -p 82:80 nginx
+docker run -itd -P -v /root/docker-folder/html/index.html:/user/share/nginx/html nginx
+docker run -itd --name con1  -p 8080:80 -v b1:/usr/share/nginx/html nginx
