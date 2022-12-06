@@ -1,0 +1,164 @@
+App Service Steps
+
+Step:-1 
+        Go to the Azure portal home page and select App Service and click on the create button.
+
+Step:-2  
+           Select Subscription name in the subscription field whatever subscription you want to  
+choose to create an app service. And select resource group in the resource group field.
+Step:-3 
+   In the instance details section mention the App service name whatever name you want  
+to use
+
+Step:-4    In the Publish, select the Docker container check box. And then select the Operating 
+   system type. And select the region where you want to configure the app server.
+
+Step:-5    Select the linux default plan and then change later as per requirement.
+
+Step:6     Zone redundancy you can select default as we will app service in the same zone.
+     
+Step: 7    In the Docker Tab Option field please choose the single container. And in the Image 
+   source you need to mention the Azure Container registry.
+
+Step:-8   In the Azure container registry option we need to select the Registry name, registry 
+   image and tag name.
+
+Step:- 9 Select network injection Off and later on you can add the network as per our requirement from the network option in the app service left side scroll war.
+
+Step:-10   In the monitoring tab you can select application insight or you can ignore default as its 
+    chargeable option.  
+Step:- 11  Create and Review.
+
+Post Activity
+
+Step:- 12   Enable the database port 3306 from azure VM networking 
+
+Step:-13  Go to app service and select deployment center, inside the container registry fill the 
+    registry setting (subscription, registry name, image and tag and ignore rest of the  
+    option.. and press ok
+
+
+
+
+
+
+Step:-  To enable all the configuration settings we need to enable logs and application insight. Other settings we can see in existing app services like port enable and registry details.
+
+Increasing  CPU/RAM in app service from app plan (P2V3)
+Public IP configuration in database.properties
+Bcprov-jdk14-1.38.jar  jar file to be removed from service jar lib file)
+
+Setting to be enabled: for below in app service
+
+WEBSITES_CONTAINER_START_TIME_LIMIT
+1800
+—-------------------------------------------
+WEBSITE_PORT: 8080
+—---------------------------------------------------------------
+TZ :  Asia/Kolkota
+—-----------------------------------------------------------------
+=========================
+Health check
+/regression2/rest/userAccountResource/getInstanceHelthCheck
+
+=====================
+Connection string to be configured in configuration section
+
+DB 
+Database=sis_training; Data Source=mysql-prod001.mysql.database.azure.com; User Id=mysqladmin@mysql-prod001; Password={password@123}
+
+
+Enable: app service logs quota setting to 100MB
+And check box in diagnostic setting 
+
+Storage creating/configuration and mapping
+
+Run these command on job server to map with Azure storage, in this file  
+
+Step:- Go to storage account and click on create storage button and fill the details:
+
+ Subscription name
+Resource group
+Storage name
+Region name
+Performance (standard storage)
+
+Advance Tab:- Select tier Cool
+Network access :-  selected network (option 2) and select the network according to subscription name(we can also change the network setting later from network option.
+
+Routine preference : microsoft  network routine and rest of the setting you can take as a default
+Creation and configuration file share in the  storage
+
+Go to storage -> file share ->  click on + sign to create new file share (sisfileshare)
+
+Mapping storage  with app service
+
+Step:- Go to sistraining app service -> Configuration ->  Path mapping -> new azure storage mount and fill the storage details:-
+
+Azure storage mount name:-  SiS-Training
+Storage name: -  sistrainingstorage
+Storage file:- Azure file
+Azure container storage :- sisfileshare
+Mount path:-  /opt/serosoft/v2_uploads
+
+===================
+V2 Upload mapping on Job server
+
+Go to storage -> file share ->  Connect -> Show script for linux/windows and copy the script and run on job server after changing the folder path
+
+V2_upload folder upload on storage.(sis_training)
+
+az storage file upload-batch --destination sisfileshare --source . --account-name sistrainingstorage --account-key 4oOmPpdYvk8T3TVOnthP7XUqR64nG/et8oFYuI83EcGmfWixoGjR4hY//DxYpb7nqwiJTjlkz1r9+AStnTTzjQ==
+
+—--------------------------------------------------------------
+
+
+
+
+ 
+
+
+
+
+==============================
+Changes for Redis
+
+Changes in War file for redis before uploading into container Registry
+File name (serosoft-academia-security.xml)
+ 
+<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+    <property name="hostName" value="serosoft.redis.cache.windows.net"/>
+    <property name="port" value="6379"/>
+    <property name="password" value="xKJqIgMGuV67BTuW3nPEsNk5mpBxu9AzCaGWoOVE="/>
+    <property name="database" value="1"/>
+  </bean>
+ 
+======================
+Filename (Serosoft-academia-spring-cache.xml)
+
+<constructor-arg index="3" ref="redisTemplate"/>
+
+https://docs.google.com/document/d/1lAZ4YLjXEuDP45EkaDRn6d-zkiZ7tOxaqZo-nHlKNGU/edit
+
+==============
+
+
+
+Container Registry installation Steps:
+
+Steps:-1  In the Azure portal go to Home page and select Container Registry and click on create   container registry.  
+
+Steps:-2  Select Subscription in the subscription field and resource group where you want to  create registry.
+
+Steps:-3  Select Registry name, location and SKU, anyone from the drop down list. If you will select premium then only you can select the private access otherwise you need to select public access.
+
+
+
+Steps:- 4  In the private connection create a private endpoint connection and select the vnet and subnet and then select ok.
+
+Steps:-5  Create+Review.
+ 
+
+
+==================================
+
