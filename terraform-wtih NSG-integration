@@ -1,0 +1,103 @@
+
+
+#Create a resource group
+resource "azurerm_resource_group" "myterraformnewrg" {
+    name = "new_rg1"
+    location= "Westeurope"
+
+
+}
+
+# create virtual network
+resource "azurerm_virtual_network" "mynetwork" {
+
+
+    name = "network1"
+    address_space = ["10.0.0.0/16"]
+    location = "Westeurope"
+    resource_group_name = azurerm_resource_group.myterraformnewrg.name
+}
+
+#create subnet
+resource "azurerm_subnet" "mysubnet01"{
+    name = "subnet_local"
+    resource_group_name = azurerm_resource_group.myterraformnewrg.name
+    virtual_network_name = azurerm_virtual_network.mynetwork.name
+    address_prefixes  = ["10.0.1.0/24"]
+
+}
+
+#create public ip
+resource "azurerm_public_ip" "myterraformpip" {
+    name = "sero_public_ip"
+    location = "Westeurope"
+    resource_group_name = azurerm_resource_group.myterraformnewrg.name
+    allocation_method = "Static"
+    
+}
+# Create Network Security Group and rule
+resource "azurerm_network_security_group" "myterraformnsg" {
+    name                = "myNetworkSecurityGroup"
+    location            = "Westeurope"
+    resource_group_name = azurerm_resource_group.myterraformnewrg.name
+    
+    security_rule {
+        name                       = "SSH"
+        priority                   = 1001
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "1.2.3.4/32"
+        destination_address_prefix = "*"
+    }
+    }
+#     network_security_group_id=azurerm_network_security_group.myterraformnsg.id
+
+
+resource "azurerm_subnet_network_security_group_association" "sec-group-association" {
+  subnet_id                 = azurerm_subnet.mysubnet01.id
+   network_security_group_id=azurerm_network_security_group.myterraformnsg.id
+}
+#Network interface
+resource "azurerm_network_interface" "myinterface01"{
+    name = "mynetwork_CARD1"
+    location = "Westeurope"
+    resource_group_name = azurerm_resource_group.myterraformnewrg.name
+   
+    ip_configuration {
+        name = "myipadd01"
+        subnet_id = azurerm_subnet.mysubnet01.id
+       
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id = azurerm_public_ip.myterraformpip.id 
+
+    }
+}
+
+resource "azurerm_linux_virtual_machine" "example" {
+  name                = "example-machine"
+  resource_group_name = azurerm_resource_group.myterraformnewrg.name
+  location            = azurerm_resource_group.myterraformnewrg.location
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  network_interface_ids = [
+    azurerm_network_interface.myinterface01.id,
+  ]
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("/home/shivprashad/.ssh/id_rsa.pub")
+  }
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "16.04-LTS"
+    version   = "latest"
+  }
+}
