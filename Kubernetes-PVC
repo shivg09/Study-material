@@ -58,3 +58,44 @@ spec:
     targetPort: 8080
     nodePort: 31111
 
+
+====================================
+Storage file
+
+allowVolumeExpansion: true
+allowedTopologies:
+- matchLabelExpressions:
+  - key: failure-domain.beta.kubernetes.io/zone
+    values:
+    - westeurope
+   
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+  labels:
+    kubernetes.io/cluster-service: "true"
+  name: tomcat-pvc2
+parameters:
+  kind: Managed
+  storageaccounttype: Standard_LRS
+provisioner: kubernetes.io/azure-disk
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+
+====================
+pvc file
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tomcat-pvc2
+  namespace: myapp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: tomcat-pvc2
+  
+  
