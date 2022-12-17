@@ -1,3 +1,7 @@
+How to login in POD
+kubectl exec -it pod/mysql-865d449d7f-qrdj4 -n myapp /bin/bash
+===================
+
 seroadmin@Stasy-test-jenkins:~$ cat mysql.yaml 
 apiVersion: apps/v1
 kind: Deployment
