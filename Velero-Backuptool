@@ -45,6 +45,33 @@ Increase the cpu & RAM in velero_new.yaml file which is created by above command
 kubectl apply -f velero_new.yaml  (run this command two time)
 check (kubectl get namespace (velero namespace)
 
+kubectl logs pod/velero-575fdbf864-hjxsg -n velero |grep Error (in case of velero pod crashloopbackoff)
 
+Note:- you have to provide the permission on storage -> IAM -> roles assignement -> owner -> velero-serviceprinciple)
+  Same IAM role permission to be set for kubernetes cluster
+  Same IAM role permission to the workernode resource group.(MC_aks-rg_aks-18_westeurope)
+    
+
+===============
+###### How to take backup
+commands
+velero backup create fullbackup_10_12-202012 --include-namespaces tomcat(tomcat is a application namespace)
+belero get backup (this command will show the backup progress)
+
+
+###### How to restore backup 
+
+velero restore create --from-backup nginx-example
+velero restore create --from-backup fullbackup26 (backup name)
+
+
+
+#### Common command
+
+Velero get backup
+velero describe backup backup_name
+velero delete schedule --all
+velero get backup
+velero delete backup  --all
 
 
