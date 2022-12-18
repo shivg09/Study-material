@@ -58,14 +58,24 @@ commands
 velero backup create fullbackup_10_12-202012 --include-namespaces tomcat(tomcat is a application namespace for taking backup)
 BACKUP SECHEUDLE->  velero schedule create dev-test  --schedule="@every 6s" --include-namespace nginx
 
+velero backup create fullbackup_10_12-202012 --include-namespaces tomcat  --ttl  2160h0m0s(90days) (how long you will keep backup afte that it will get deleted automatic)
+
+
 velero get backup (this command will show the backup progress)
 velero backup logs fullbackup_10_12-202012 (backup logs show )
+velero backup describe fullback_10_12-122012  (backup details)
+To delete the schedule backup
+velero get backup then second command - velero delete backup name from the list)
+kubectl delete all -all -n tomcat ( all the application which is in tomcat workspace will be deleted)
+
 
 ###### How to restore backup 
 
 velero restore create --from-backup nginx-example
-velero restore create --from-backup fullbackup_10_12-202012 (backup name)
+velero restore create --from-backup fullbackup_10_12-202012 (name of the backup ) name of the backup you can check from- velero get backup command)
+after taking backup you will run the command - kubectl get ns ( is command se jo bhi name space ka backup restore kiya wo name space show ho jayegi)
 
+velero get restore ( is command se restore ka status show karega)
 How to check the backup  ( Go to storage -> container -> and container folder)
 
 
