@@ -8,4 +8,33 @@ Balero backup Steps:
  tanant id- 4b118917-3d2f-4807-bf25-399621d00716)
 
 ============================
+1 - Create credential file   (client id /tanent id /secret you will get in velero - app registration in active directory option
+
+AZURE_CLOUD_NAME=AzurePublicCloud
+AZURE_SUBSCRIPTION_ID=adf7b698-fc97-47a3-bd56-6993765abbba
+AZURE_TENANT_ID=4b118917-3d2f-4807-bf25-399621d00716
+AZURE_CLIENT_ID=97091a32-ec9d-4401-8896-b45b4e7ce95f
+AZURE_CLIENT_SECRET=b6357ab0-035e-4aa7-b730-7a04812d1290
+AZURE_RESOURCE_GROUP=MC_aks-rg_aks-18_westeurope
+
+
+===================
+Baleero plungin intallation on jumbbox machine
+#Install Velero binary:
+
+wget https://github.com/vmware-tanzu/velero/releases/download/v1.3.2/velero-v1.3.2-linux-amd64.tar.gz
+
+#####Extract the tarball:
+
+tar -xvf velero-v1.3.2-linux-amd64.tar.gz -C /tmp
+
+#######Move the extracted velero binary to /usr/local/bin
+
+sudo mv /tmp/velero-v1.3.2-linux-amd64/velero /usr/local/bin
+mkdir velero
+cd velero
+vim credentials
+
+kubectl cluster-info
+
 
