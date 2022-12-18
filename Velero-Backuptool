@@ -56,6 +56,8 @@ Note:- you have to provide the permission on storage -> IAM -> roles assignement
 ###### How to take backup
 commands
 velero backup create fullbackup_10_12-202012 --include-namespaces tomcat(tomcat is a application namespace for taking backup)
+BACKUP SECHEUDLE->  velero schedule create dev-test  --schedule="@every 6s" --include-namespace nginx
+
 velero get backup (this command will show the backup progress)
 velero backup logs fullbackup_10_12-202012 (backup logs show )
 
