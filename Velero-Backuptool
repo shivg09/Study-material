@@ -62,7 +62,7 @@ velero backup logs fullbackup_10_12-202012 (backup logs show )
 ###### How to restore backup 
 
 velero restore create --from-backup nginx-example
-velero restore create --from-backup fullbackup26 (backup name)
+velero restore create --from-backup fullbackup_10_12-202012 (backup name)
 
 How to check the backup  ( Go to storage -> container -> and container folder)
 
