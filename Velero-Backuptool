@@ -1,5 +1,11 @@
 Balero backup Steps:
 1 create storage to take a backup
 2. register the velero tool in azure active directory -> app registration -> give the name velero-serviceprinciple -> go to certificate & secret and create secret
+3 copy the value from the secret
+ To to velero serviceprinciple -> overview -> and copy client id, Tanent id 
+ (secret value -Ma.8Q~etwlbxRY52M.tSxxovdnSB8cU8t2AvvcKZ) , 
+ (client id from velero service principle overview  -  97091a32-ec9d-4401-8896-b45b4e7ce95f and
+ tanant id- 4b118917-3d2f-4807-bf25-399621d00716)
 
+============================
 
