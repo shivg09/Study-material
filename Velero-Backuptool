@@ -1,5 +1,7 @@
 Balero backup Steps:
-1 create storage to take a backup
+https://youtu.be/vZEh89YFeoM  - B 03-Session 07
+https://youtu.be/bvx4cO0eMVI  - B 03-Session 07
+1 create storage to take a backup  (storage-> container -> bucket(create bucker container)
 2. register the velero tool in azure active directory -> app registration -> give the name velero-serviceprinciple -> go to certificate & secret and create secret
 3 copy the value from the secret
  To to velero serviceprinciple -> overview -> and copy client id, Tanent id 
@@ -21,6 +23,7 @@ AZURE_RESOURCE_GROUP=MC_aks-rg_aks-18_westeurope
 ===================
 Baleero plungin intallation on jumbbox machine
 #Install Velero binary:
+kubectl cluster-info (to check cluster)
 
 wget https://github.com/vmware-tanzu/velero/releases/download/v1.3.2/velero-v1.3.2-linux-amd64.tar.gz
 
@@ -33,8 +36,15 @@ tar -xvf velero-v1.3.2-linux-amd64.tar.gz -C /tmp
 sudo mv /tmp/velero-v1.3.2-linux-amd64/velero /usr/local/bin
 mkdir velero
 cd velero
-vim credentials
+vim credentials (copy all the above credentials details in this file)
 
-kubectl cluster-info
+And then run the below command
+velero install --provider azure --plugins velero/velero-plugin-for-microsoft-azure:v1.1.0 --bucket bucket --backup-location-config resourceGroup=dev-bucket,storageAccount=velerostorageaccount23,subscriptionId=5cd3ce5c-76fb-4607-aef8-436548187a7c --secret-file ./credentials  --namespace velero --dry-run -o yaml > velero_new.yaml
+
+Increase the cpu & RAM in velero_new.yaml file which is created by above command.
+kubectl apply -f velero_new.yaml  (run this command two time)
+check (kubectl get namespace (velero namespace)
+
+
 
 
