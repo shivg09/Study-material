@@ -56,7 +56,7 @@ Note:- you have to provide the permission on storage -> IAM -> roles assignement
 ###### How to take backup
 commands
 velero backup create fullbackup_10_12-202012 --include-namespaces tomcat(tomcat is a application namespace for taking backup)
-BACKUP SECHEUDLE->  velero schedule create dev-test  --schedule="@every 6s" --include-namespace nginx
+BACKUP SECHEUDLE->  velero schedule create dev-test  --schedule="@every 6s" --include-namespace nginx  (every 6 second backup ke liye)
 
 velero backup create fullbackup_10_12-202012 --include-namespaces tomcat  --ttl  2160h0m0s(90days) (how long you will keep backup afte that it will get deleted automatic)
 
