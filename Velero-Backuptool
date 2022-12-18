@@ -1,0 +1,5 @@
+Balero backup Steps:
+1 create storage to take a backup
+2. register the velero tool in azure active directory -> app registration -> give the name velero-serviceprinciple -> go to certificate & secret and create secret
+
+
