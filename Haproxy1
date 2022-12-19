@@ -1,0 +1,79 @@
+academia@erploadbal:/etc/haproxy$ cat haproxy.cfg
+global
+        log /dev/log    local0
+        log /dev/log    local1 notice
+        chroot /var/lib/haproxy
+        stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+        stats timeout 30s
+        user haproxy
+        group haproxy
+        daemon
+
+        # Default SSL material locations
+  #      ca-base /opt/ssl/server.key
+   #     crt-base /opt/ssl/server.crt
+
+       #ca-base /etc/letsencrypt/live/acacia-test.africau.ac.zw/fullchain.pem
+       #crt-base /etc/letsencrypt/live/acacia-test.africau.ac.zw/privkey.pem
+
+
+        # Default ciphers to use on SSL-enabled listening sockets.
+        # For more information, see ciphers(1SSL). This list is from:
+        #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
+        # An alternative list with additional directives can be obtained from
+        #  https://mozilla.github.io/server-side-tls/ssl-config-generator/?server=haproxy
+        ssl-default-bind-ciphers ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS
+        ssl-default-bind-options no-sslv3
+
+defaults
+        log     global
+        mode    http
+        option  httplog
+        option  dontlognull
+        timeout connect 5000
+        timeout client  50000
+        timeout server  50000
+        errorfile 400 /etc/haproxy/errors/400.http
+        errorfile 403 /etc/haproxy/errors/403.http
+        errorfile 408 /etc/haproxy/errors/408.http
+        errorfile 500 /etc/haproxy/errors/500.http
+        errorfile 502 /etc/haproxy/errors/502.http
+        errorfile 503 /etc/haproxy/errors/503.http
+        errorfile 504 /etc/haproxy/errors/504.http
+
+#HAproxy for web servers
+#frontend web-frontend
+#frontend web-http
+ # bind *:80
+  #maxconn 10000
+  #reqadd X-Forwarded-Proto:\ http
+  #default_backend web-backend
+
+frontend web-frontend
+ # mode http
+  bind :80
+ # bind :443 ssl crt /opt/ssl/aucert26sep.pem
+ # bind :443 ssl crt /etc/letsencrypt/live/acacia-test.africau.ac.zw/fullchain.pem  
+ #bind :443 ssl crt /etc/letsencrypt/live/acacia-test.africau.ac.zw/fullchain.pem 
+ #bind :443 ssl crt /etc/letsencrypt/live/acacia-test.africau.ac.zw/privkey.pem
+ bind :443 ssl crt /opt/ssl/letsencrypt.pem
+ #bind *:443 ssl crt /etc/ssl/certs/server.pem
+  http-request redirect scheme https unless { ssl_fc }
+  mode http
+  default_backend web-backend
+   
+
+backend web-backend
+   #redirect scheme https if !{ ssl_fc }
+   mode http
+   balance roundrobin
+   option forwardfor
+    option httpchk HEAD / HTTP/1.1\r\nHost:localhost
+#   server  server3.dituniversity.edu.in 10.1.3.229:80 check
+    server erpwebsvr1	10.31.80.50:80 check
+    server erpwebsvr2	10.31.80.51:80 check
+    server erpwebsvr3	10.31.80.52:80 check
+     http-request set-header X-Forwarded-Port %[dst_port]
+    http-request add-header X-Forwarded-Proto https if { ssl_fc }
+#HAProxy montitoring Config
+
