@@ -1,0 +1,7 @@
+FROM ubuntu
+RUN apt-get -y update && apt-get install -y apache2 && apt-get install -y zip
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page286/dropbeat.zip /var/www/html
+WORKDIR /var/www/html
+RUN unzip dropbeat.zip
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+EXPOSE 80
