@@ -1,0 +1,208 @@
+DB
+Database change query
+seroadmin@Accra-vgu-testing-vm:~$ grep 'CREATE DATABASE' vgu_11jan.sql  (to show datebase name in sql file)
+seroadmin@Accra-vgu-testing-vm:~$ sed -i 's/`vgu`/`testing_vgu`/g' vgu_11jan.sql (old name se new name me convert karti hai main db  me)
+seroadmin@Accra-vgu-testing-vm:~$ sed -i 's/`vgu_audit`/`testing_vgu_audit`/g' vgu_11jan.sql
+-------------------------------------------------------------------------------------------------------------------------------
+
+grep 'CREATE DATABASE' sqlfilename
+<<<<<<<<<<<<<<<<for check DB name>>>>>>>>>>>>>>>
+
+sed -i 's/`oldDBname`/`newDBname`/g' test.sql
+<<<<<<<<<<<change DB from old name to new name>>>>>>>>>>>
+========================================================================
+
+  DB Access and Revoke
+Login Mysql Database
+#To see user permission and Grants like; accessed tablename
+Show grants for ‘serosoft’; (serosoft is a user, To  see the permission of user)
+      3)  REVOKE SELECT on vgu.student_list_view FROM ‘serosoft’@’%’; (“SELECT”permission,            “vgu.student_list_view”DBname.teblename, “serosoft”user)
+Show grants for ‘serosoft’; (to verify table name remove or not)
+GRANT SELECT ON vgu.vgu_student_list_view TO ‘serosoft’@’%’; (Provide access to the table)
+Show grants for ‘serosoft’; (to show how many table access to serosoft user)
+flush privileges; (To apply changes)
+-----------------------------------------------------------------------------------------------------------------
+CREATE USER 'ss_root'@'%' IDENTIFIED BY 's3r0s0ft'; (Create user in mysql)
+GRANT ALL PRIVILEGES ON *.* TO 'ss_root'@'%'; (To give all privileges of user)
+GRANT ALL PRIVILEGES ON *.* TO 'ss_root'@'%' WITH GRANT OPTION; (To give all permission with grant option)
+grant select, show view on sunshine.student_list_view to 'su_user'@'%';
+#To give select and view access for su_user in DB=sunshine & Table=student_list_view
+or 
+grant select, show view on au_demo.Student_Master_Data to 'Africauadmin'@'%';
+FLUSH PRIVILEGES; (To apply changes)
+
+================================================================================
+
+Give DB access by a Commend
+
+mysql -u ss_root -p
+#give password
+#show/view databases
+show databases;
+#show user list in mysql
+SELECT user from mysql.user;
+#create ratnesh user with Ratnesh@123 password
+create user 'ratnesh'@'%' identified by 'Ratnesh@123';
+#give *.* (schema name.teble name) to user
+grant all privileges on ku_demo.* to 'ratnesh'@'%';
+grant all privileges on ku_demo_audit.* to 'ratnesh'@'%';
+#show tables for particular user like “suni_user”
+Show grants for suni_user;
+flush privileges;
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Query to create a user for 1 Day password expiration.
+
+CREATE USER 'test'@'%' identified by 's3r0s0ft';                            
+ALTER USER 'test'@'%' PASSWORD EXPIRE INTERVAL 1 DAY;
+select user, host, password_lifetime from mysql.user where user like 'test';
+select user from mysql.user;                                                           ====>>>> to check the user
+ALTER USER `test`@`%` IDENTIFIED BY 'qwerty';                       ======>>>>> to re-assign new password for existing user
+ALTER USER 'test'@'%' PASSWORD EXPIRE INTERVAL 1 DAY;  ==>>>>> again run this command for 1 day password expiry
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Change user password
+
+ALTER USER 'ss_root'@'localhost' IDENTIFIED BY 's3r0s0ft';
+
+ALTER USER 'ss_root'@'%' IDENTIFIED BY 's3r0s0ft';
+flush privileges;
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Error
+Cannot Connect to Database Server
+Your connection attempt failed for user 'root' to the MySQL server at localhost:3306:
+  An AppArmor policy prevents this sender from sending this message to this recipient; type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo" label="snap.mysql-workbench-community.mysql-workbench- community (enforce)") interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)" requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome- keyring-daemon –daemonize –login" label="unconfined")
+
+Solution
+sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
+https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
+
+###############################################################################
+
+Powerbi error while taking DB dump 
+#workbench
+#Use <main database name>; & flush
+use accra_au;
+#flush below commend
+SELECT * FROM information_schema.views;
+#Type the name of the error eg- “powerbi” and search
+#Goto  Views option & search that line 
+#find table_name and select table and right click on table go alter view 
+#replace from powerbi to ss_root & apply.
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+#import DB (.sql) in existing DB
+pv buzz.sql | mysql -u ss_root -p  buzz_uat
+—------------------------------------------------------------------
+mysql -u ss_root -p dbname < file.sql
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Mysql Uninstallation/Remove
+
+$ sudo apt-get remove --purge mysql-server mysql-client mysql-common -y
+$ sudo apt-get autoremove -y
+$ sudo apt-get autoclean
+$ sudo rm -rf /etc/mysql
+# Delete all MySQL files on your server: 
+$ sudo find / -iname 'mysql*' -exec rm -rf {} \;
+$ sudo apt-get remove --purge mysql-server mysql-client mysql-common -y
+
+**************************************************************************************************
+
+Error; NO_AUTO_CREATE_USER
+
+sed -i 's/NO_AUTO_CREATE_USER//' tsm_audit16dec.sql
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Check DB size before Dump
+
+#login mysql
+mysql -u ss_root -p
+password;
+#select database
+use stasyiie;
+#run query
+SELECT table_schema AS 'DB Name', ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) AS 'DB Size in MB' FROM information_schema.tables GROUP BY table_schema;
+—---------------------------------------------------------
+SELECT table_schema "DB Name",
+        ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" 
+FROM information_schema.tables 
+GROUP BY table_schema;
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+Database Stored
+
+/var/lib/mysql
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Mysql Max Connection Error / Underlying database! / Tomcat startup error
+
+#mysql -u ss_root -p
+#give password
+SHOW VARIABLES LIKE "max_connections";
+SET GLOBAL max_connections = 50000;
+FLUSH HOSTS;
+#exit
+#restart tomcat
+===============================================================
+Workbench connection established commend
+sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
+
+
+
+----To check size of database in GB ------
+SELECT TABLE_SCHEMA AS `Database`,  ROUND(SUM(DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024 / 1024, 2) AS `Size (GB)`  FROM information_schema.TABLES WHERE TABLE_SCHEMA="db_name";
+ 
+----To check size of database in MB ------
+SELECT TABLE_SCHEMA AS `Database`,  ROUND(SUM(DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024, 2) AS `Size (MB)`  FROM information_schema.TABLES WHERE TABLE_SCHEMA="db_name";
+ 
+ 
+----To check size of All databases in GB ------
+SELECT table_schema AS "Database Name",
+ROUND(SUM(data_length + index_length) / 1024 / 1024 / 1024, 2) AS "Size in (GB)"
+FROM information_schema.TABLES
+GROUP BY table_schema; 
+ 
+----To check size of All databases in MB ------
+SELECT table_schema AS "Database Name",
+ROUND(SUM(data_length + index_length) / 1024 / 1024, 2) AS "Size in (MB)"
+FROM information_schema.TABLES
+GROUP BY table_schema; 
+****************************************************************************************
+DB Backup
+#!/bin/bash
+
+#This is backup script
+NOWTIME=$(date +"%d-%m-%Y-%H-%M")
+NOWDATE=$(date +"%m-%d-%Y")
+echo Taking backup ON $NOWTIME
+
+mkdir /opt/serosoft/Erp_backup/data/$NOWDATE
+
+
+mysqldump --user=ss_root --host=10.20.41.104 --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF "rru" > /opt/serosoft/Erp_backup/data/$NOWDATE/rru-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.20.41.104 --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF "rru_audit" > /opt/serosoft/Erp_backup/data/$NOWDATE/rru_audit-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.20.41.104 --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF "rru_applynow" > /opt/serosoft/Erp_backup/data/$NOWDATE/rru_applynow-$NOWTIME.sql
+
+
+cd /opt/serosoft/Erp_backup/data/$NOWDATE
+tar -cf dbbackups-$NOWTIME.tar *$NOWTIME.sql
+gzip dbbackups-$NOWTIME.tar
+rm -rf *$NOWTIME.sql
+
+#Script for v2upload
+tar -cvpzf /opt/serosoft/Erp_backup/data/$NOWDATE/$NOWTIME-v2_upload.tar.gz /opt/serosoft/v2_uploads
+
+
+echo [RRU@123 | sudo -S find /opt/serosoft/Erp_backup/data/ -type d -mtime +30 -exec rm -rf {} \;
+***********************************************************************************************
+
+
+
