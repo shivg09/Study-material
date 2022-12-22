@@ -1,4 +1,6 @@
 https://gitlab.com/nanuchi/youtube-tutorial-series/-/tree/master/demo-kubernetes-components
+
+https://www.google.com/search?q=kubernetes+deployment+yaml+example&biw=1528&bih=788&tbm=vid&sxsrf=ALiCzsb_L0MW7iGFwcZQ_lrsBM1mQyTZpw%3A1671729909289&ei=9ZKkY6eCEfCVseMPlaKt-AY&oq=kubernetes&gs_lcp=Cg1nd3Mtd2l6LXZpZGVvEAEYAjIECCMQJzIECCMQJzIECCMQJzINCAAQgAQQhwIQsQMQFDILCAAQgAQQsQMQgwEyCAgAEIAEELEDMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwEyCAgAEIAEELEDMgsIABCABBCxAxCDAToFCAAQgAQ6BggAEBYQHlDoEli5F2DEUGgAcAB4AIABnwGIAf8GkgEDMC42mAEAoAEBwAEB&sclient=gws-wiz-video#fpstate=ive&vld=cid:d1a77407,vid:EQNO_kM96Mo
 =============================================================(config-map.yaml
 
 apiVersion: v1
