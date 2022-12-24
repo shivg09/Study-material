@@ -1,4 +1,6 @@
 
+https://www.youtube.com/watch?v=j1n-BXGJMS4
+==========================
 apiVersion: apps/v1
 kind: Deployment
 metadata:
