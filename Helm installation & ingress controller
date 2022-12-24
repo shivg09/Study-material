@@ -37,3 +37,40 @@ spec:
           serviceName: myjenkins-agent (this is cluster ip service name for tomcat application so we need this service name here in the ingress-nginx so that it will go through this service name)
           servicePort: 50000 (this is cluster IP port number from which ingress-nginx will reach to pod access from outside)
 		  ----------------------------------------------
+
+(Loadbalancer service tomcat app serivce ke sath bind kiya phir loadbalancer service ke ip and port ko ingress-nginx ko map karnege)
+Simple Loadbalancer yaml file
+    
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: loadbalancer-service
+    spec:
+      type: LoadBalancer
+      selector:
+        app: tomcat
+      ports:
+      - name: http
+        protocol: TCP     
+        port: 8080
+        targetPort: 8080
+        
+        
+  http://ipaddress:8080
+  ===================
+  
+  service for nodeport
+  
+  kind: Service
+    apiVersion: v1
+    metadata:
+      name: Nodeport-service
+    spec:
+      type: NodePort
+      selector:
+        app: tomcat
+      ports:
+      - name: http
+        protocol: TCP     
+        port: 8080
+        targetPort: 8080
