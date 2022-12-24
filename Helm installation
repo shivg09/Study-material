@@ -1,0 +1,39 @@
+Helm Plugin installation 
+  https://helm.sh/docs/intro/install/
+  
+  $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+  
+  Add repo in helm
+  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  helm repo update
+  
+  kubectl create ns ingress-nginx
+  
+  
+  install ingress-nginx controller
+helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx  -f nginx-ingress-controller.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
+ 
+ kubectl get all -n ingress-nginx 
+ 
+ -------------------------
+ apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress-object
+  namespace: jenkins
+spec:
+  tls:
+  - hosts:
+      - web-qa.cloud.net
+    secretName: tls-ingress
+  rules:
+  - host: web-qa.cloud.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myjenkins-agent (this is cluster ip service name for tomcat application so we need this service name here in the ingress-nginx so that it will go through this service name)
+          servicePort: 50000 (this is cluster IP port number from which ingress-nginx will reach to pod access from outside)
+		  ----------------------------------------------
