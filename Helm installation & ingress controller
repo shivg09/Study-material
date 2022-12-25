@@ -8,9 +8,16 @@ $ ./get_helm.sh
   Add repo in helm
   helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
   helm repo update
+  ================================================
+  
+   kubectl get all -n ingress-nginx
+  
+vi nginx-ingress-controller.yaml
+
+  
   
   kubectl create ns ingress-nginx
-  
+    
   
   install ingress-nginx controller
 helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx  -f nginx-ingress-controller.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
