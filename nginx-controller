@@ -116,6 +116,34 @@ helm install nginx-ingress ingress-nginx/ingress-nginx \
 
     --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
     
+    ======================================================
+    
+Ingress object creation in the name space where your deplyment 
+
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress-object
+  namespace: jenkins
+spec:
+  tls:
+  - hosts:
+      - web-qa.cloud.net
+    secretName: tls-ingress
+  rules:
+  - host: web-qa.cloud.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myjenkins-agent
+          servicePort: 50000
+
+    
+    
+    
+    
     
     ====================================================
     Simple Loadbalancer yaml file
