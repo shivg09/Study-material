@@ -91,7 +91,7 @@ controller:
 
     annotations:
 
-        service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "aks-subnet"  (ye cluster ka subnet hai)
+        service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "aks-subnet"  (ye cluster ka subnet hai  (MC_dev se searcg karna hai azure portal pe)
 
         service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
