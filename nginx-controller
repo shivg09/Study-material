@@ -83,20 +83,16 @@ spec:
 ### if you want use private IP into nginx ingress controller ##
 
 
+vim  nginx-ingress-controller.yaml
+
 controller:
-
   service:
-
     loadBalancerIP: 10.224.0.10
-
     annotations:
-
         service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "aks-subnet"  (ye cluster ka subnet hai  (MC_dev se searcg karna hai azure portal pe)
-
         service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
- 
-nginx-ingress-controller.yaml
+ ======================
  
 helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx  -f nginx-ingress-controller.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux	
 
