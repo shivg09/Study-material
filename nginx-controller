@@ -43,7 +43,7 @@ you have to create TLS certificate using ssl file
 kubectl -n jenkins create secret tls tls-ingress \
   --cert=web-qa.cloud.net.crt \
   --key=web-qa.cloud.net.key
- 
+ (Note- jenkins is a name space)
  ========================
  
  #### Step -05 ###
