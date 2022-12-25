@@ -87,7 +87,7 @@ vim  nginx-ingress-controller.yaml
 
 controller:
   service:
-    loadBalancerIP: 10.224.0.10
+    loadBalancerIP: 10.224.0.10  (cluster ke subnet ka ip hai ye private wala)
     annotations:
         service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "aks-subnet"  (ye cluster ka subnet hai  (MC_dev se searcg karna hai azure portal pe)
         service.beta.kubernetes.io/azure-load-balancer-internal: "true"
