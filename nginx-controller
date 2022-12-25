@@ -53,7 +53,7 @@ kubectl -n jenkins create secret tls tls-ingress \
  
 
 
-apiVersion: networking.k8s.io/v1beta1
+ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: jenkins-ingress-object
@@ -69,8 +69,8 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: myjenkins-agent
-          servicePort: 50000
+          serviceName: myjenkins-agent (this is cluster ip service name for tomcat application so we need this service name here in the ingress-nginx so that it will go through this service name)
+          servicePort: 50000 (this is cluster IP port number from which ingress-nginx will reach to pod access from outside)
 		  
 		  
 		  
