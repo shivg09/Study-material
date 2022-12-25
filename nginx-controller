@@ -1,0 +1,190 @@
+
+Step -01
+
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+prompt = no
+[req_distinguished_name]
+C = IN
+ST = PUNE
+L = Megapolish, hinjewadi phase 3
+O = Tek International
+OU = cloud
+CN = cloud.net
+[v3_req]
+keyUsage = keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1= web-qa.cloud.net
+
+## Step  -02
+
+openssl req -text -noout -verify -in web-qa.cloud.net
+
+openssl req -new -out web-qa.cloud.net.csr -newkey rsa:2048 -nodes -sha256 -keyout web-qa.cloud.net.key -config req.conf
+
+openssl x509 -req -in <cert_name>.csr -signkey <key_name>.key -out output.crt 
+
+## Step -03
+
+We have request to security team to generate ssl certificate using csr file what you will be shared
+
+## Step -04
+
+you have to create TLS certificate using ssl file
+
+kubectl -n jenkins create secret tls tls-ingress \
+  --cert=web-qa.cloud.net.crt \
+  --key=web-qa.cloud.net.key
+ 
+ ========================
+ 
+ #### Step -05 ###
+ 
+ You have to create Ingress object to access your application and you have to defined tls certificate into your ingress yaml file so that
+ your application will be accessible over https and make more secure.
+ 
+
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-ingress-object
+  namespace: jenkins
+spec:
+  tls:
+  - hosts:
+      - web-qa.cloud.net
+    secretName: tls-ingress
+  rules:
+  - host: web-qa.cloud.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: myjenkins-agent
+          servicePort: 50000
+		  
+		  
+		  
+		  
+=========================
+
+
+### One time job to set up over cluster level #####
+
+### if you want use private IP into nginx ingress controller ##
+
+
+controller:
+
+  service:
+
+    loadBalancerIP: 10.224.0.10
+
+    annotations:
+
+        service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "aks-subnet"  (ye cluster ka subnet hai)
+
+        service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+
+ 
+nginx-ingress-controller.yaml
+ 
+helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx  -f nginx-ingress-controller.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux	
+
+
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+ 
+
+kubectl create ns ingress-nginx
+ 
+
+ 
+helm install nginx-ingress ingress-nginx/ingress-nginx \
+
+    --namespace ingress-nginx \
+
+    -f nginx.ingress.yaml \
+
+    --set controller.replicaCount=2 \
+
+    --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
+
+    --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
+    
+    
+    ====================================================
+    Simple Loadbalancer yaml file
+    
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: loadbalancer-service
+    spec:
+      type: LoadBalancer
+      selector:
+        app: tomcat
+      ports:
+      - name: http
+        protocol: TCP     
+        port: 8080
+        targetPort: 8080
+        
+        
+  http://ipaddress:8080
+  ===================
+  
+  service for nodeport
+  
+  kind: Service
+    apiVersion: v1
+    metadata:
+      name: Nodeport-service
+    spec:
+      type: NodePort
+      selector:
+        app: tomcat
+      ports:
+      - name: http
+        protocol: TCP     
+        port: 8080
+        targetPort: 8080
+        
+  ==============
+  Helm Plugin installation 
+  https://helm.sh/docs/intro/install/
+  
+  $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+$ chmod 700 get_helm.sh
+$ ./get_helm.sh
+  
+  Add repo in helm
+  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  helm repo update
+  
+  
+  install ingress-nginx controller
+helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx  -f nginx-ingress-controller.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
+ 
+ kubectl get all -n ingress-nginx 
+ 
+ 
+  =============
+  
+  https://octopus.com/blog/jenkins-helm-install-guide  (Helm guide)
+
+ help repo list ( it will show helm repository)
+
+help list -A
+
+ command to save yaml file using help for edit purpose
+help show values jenkins/jenkins > value-file.yaml
+
+after change the yaml file run again with below command
+helm upgrade --install -f value-file.yaml myjenkins jenkins/jenkins -n [namespacename]
+
+
+  
