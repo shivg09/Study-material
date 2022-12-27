@@ -25,12 +25,12 @@ catch {
 }
 
 
-Stop-AzWebApp -ResourceGroupName anantustaging-rg -Name tustaging
+Stop-AzWebApp -ResourceGroupName tustaging-rg -Name tustaging
 
-#Stop-AzWebApp -ResourceGroupName iiitb-rg-asr -Name iibdemo-app
+#Stop-AzWebApp -ResourceGroupName iib-rg-asr -Name iibdemo-app
 
-#Stop-AzWebApp -ResourceGroupName ku-demo-app-rg -Name Kemo-App
+#Stop-AzWebApp -ResourceGroupName demo-app-rg -Name Kemo-App
 
 #Stop-AzWebApp -ResourceGroupName webapp-rg -Name tSample1
 
-#Stop-AzWebApp -ResourceGroupName sis_training-rg -Name training-APP 
+#Stop-AzWebApp -ResourceGroupName training-rg -Name training-APP 
