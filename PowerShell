@@ -1,3 +1,6 @@
+https://www.google.com/search?q=azure+powershell+tutorial&client=ubuntu&hs=r3y&channel=fs&biw=1528&bih=788&tbm=vid&sxsrf=ALiCzsbK7h49oCA6RUVTatqXJ6JibbZayg%3A1672407650711&ei=YuquY6b9KunZz7sPxMCOsAg&oq=azure+powershell+tutorial&gs_lcp=Cg1nd3Mtd2l6LXZpZGVvEAEYADIHCAAQgAQQDTIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBwgAEIAEEA0yBAgAEB4yBAgAEB4yBAgAEB46CggAELEDEIMBEEM6BQgAEIAEUJsMWNYRYJMzaABwAHgAgAGwA4gBrxWSAQUzLTUuMpgBAKABAcABAQ&sclient=gws-wiz-video#fpstate=ive&vld=cid:5d8f8dda,vid:LbGNQVbb_VI
+=================================
+
 Connect-AzAccount -SubscriptionId adf7b698-fc97-47a3-bd56-6993765abbba
 Get-Az 
 Get-AzContext  (To check which subscription you have logged in currently
@@ -6,4 +9,19 @@ Select-AzSubscription -SubscriptionName "West US 2_Subscription"   ( select the 
 Get-AzResourceGroup  (To Check existing resource group in subscription or subscription list)
 
 Get-AzResourceGroup |select ResourceGroupName, Location  (To check the resource group name and location )
+
+get-AzResourceGroup |Where-Object { $_.Location -eq 'westeurope' }  
+============================================================
+(BELOW COMMAND TO SEE THE PROPER FORMAT)
+PS /home/shivprashad> get-AzResourceGroup |`
+>> Where-Object { $_.Location -eq 'westeurope' } |`
+>> select ResourceGroupName, Location
+==========================================================
+To create new resource group
+New-AzResourceGroup -Name amdemo -Location 'westeurope'
+============================
+Looping to create 10 or 5 storage
+
+ @rg = "amdemo" 
+>> foreach ($1 in 1..3) { New-AzStorageAccount $rg -Name "amdemostorage$i" -Location "westeurope"}
 
