@@ -1,1 +1,6 @@
 Connect-AzAccount -SubscriptionId adf7b698-fc97-47a3-bd56-6993765abbba
+Get-Az 
+Get-AzContext  (To check which subscription you have logged in currently
+
+Select-AzSubscription -SubscriptionName "West US 2_Subscription"   ( select the subscription whre you want to create resources or VM)
+
