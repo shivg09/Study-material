@@ -49,3 +49,20 @@ $stdetail = Get-AzStorageAccount -Name reg2appstorage -ResourceGroupName reg2-st
 EX:-
 $stdetail.StorageAccountName
 =====================
+PS /home/shivprashad> $stdetail.Location                                                             
+centralindia
+PS /home/shivprashad> $stdetail.ResourceGroupName                                                    
+reg2-storage
+======================
+PS /home/shivprashad> $stdetail.StorageAccountName
+reg2appstorage
+PS /home/shivprashad> $stdetail.ResourceGroupName
+reg2-storage
+PS /home/shivprashad> $name = $stdetail.StorageAccountName
+PS /home/shivprashad> $rg = $stdetail.ResourceGroupName
+Remove-AzStorageAccount -Name $name -ResourceGroupName $rg force
+==============================
+Command to create storage account
+New-AzStorageAccount -Name bcstorageacname -Location westeurope -SkuName Standard_LRS -ResourceGroupName bc.rg  
+
+===================
