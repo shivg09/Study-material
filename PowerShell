@@ -11,6 +11,9 @@ Get-AzResourceGroup  (To Check existing resource group in subscription or subscr
 Get-AzResourceGroup |select ResourceGroupName, Location  (To check the resource group name and location )
 
 get-AzResourceGroup |Where-Object { $_.Location -eq 'westeurope' }  
+
+Get-AzResourceGroup | Where-Object {$_.Location -eq 'westeurope'} | select ResourceGroupName, Location
+
 ============================================================
 (BELOW COMMAND TO SEE THE PROPER FORMAT)
 PS /home/shivprashad> get-AzResourceGroup |`
