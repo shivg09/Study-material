@@ -23,8 +23,9 @@ PS /home/shivprashad> get-AzResourceGroup |`
 To create new resource group
 New-AzResourceGroup -Name amdemo -Location 'westeurope'
 ============================
-Looping to create 10 or 5 storage
+Looping to create storage 3 or 5 storage
+$rg = "amdemo"
 
- @rg = "amdemo" 
->> foreach ($1 in 1..3) { New-AzStorageAccount $rg -Name "amdemostorage$i" -Location "westeurope"}
+foreach($i in 1..3) { New-AzStorageAccount -ResourceGroupName $rg -Name "amdemostorage$i" -SkuName Standard_LRS -Location 'westeurope' -AsJob }
 
+===============
