@@ -1,0 +1,61 @@
+
+## az aks get-upgrades --resource-group upgrade --name upgrade-aks –output table
+(az aks get-upgrades --resource-group Total-rg --name shiv-aks --output table)
+
+Name     ResourceGroup    MasterVersion    Upgrades
+-------  ---------------  ---------------  -----------------------
+default  dev-aks          1.20.13          1.20.15, 1.21.7, 1.21.9
+
+
+====================================================================
+
+## To check which version we need to upgrade first
+az aks get-upgrades --resource-group upgrade --name upgrade-aks --output table
+
+### This is upgradation command to upgrade on particular version
+az aks upgrade --resource-group upgrade --name upgrade-aks --kubernetes-version 1.21.7 –debug
+(az aks upgrade --resource-group Total-rg --name shiv-aks --kubernetes-version 1.22.6) working this command without debug option
+============================================================================
+POD DISRUPTION BUDGET – this pdb make sure your application is up and running continuously
+
+Before to upgrade cluster, we have to check few thing
+
+    1- First we have to check pdb status over cluster
+    2- If pdb are available so we have to take backup of pdb
+    3- Then after backup we have to deleted PDB
+    4- Then run upgradation command
+    5- Once cluster has been upgraded then we have recreate pdb from backup
+
+Second thing 
+
+1 – we have to make sure internet is open on cluster because when Microsoft added temporary worker node in a cluster…they are trying to pull some extension over Microsoft repository, which is available on public repo
+
+
+
+
+
+
+
+
+
+Upgradation failed scenario:
+
+Port open in firewall to allow internet over vnet
+
+Source – aks cluster subnet
+Destination – any
+Port -443,80
+
+1 – Due to PDB – its mandatory to delete
+2 – Due to internet block over this subnet  - its mandatory to allow
+3 – Capacity issue - we have to increase quota over subscription level or location level
+4 - Limited IP range - we have increase IP range or we have delete unwanted or unused network interface in the VNET or we have to shutdown unused Virtual machine so that new IP will be release.
+
+
+kubectl get pod -A -o wide | grep aks-agentpool-12898444-vmss000002
+
+kubectl get pdb -A
+kubectl delete pdb coredns-pdb  -n kube-system
+ kubectl get pdb konnectivity-agent -n kube-system -o yaml > backup.pdb.yaml
+
+
