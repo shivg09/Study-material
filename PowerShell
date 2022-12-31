@@ -29,3 +29,21 @@ $rg = "amdemo"
 foreach($i in 1..3) { New-AzStorageAccount -ResourceGroupName $rg -Name "amdemostorage$i" -SkuName Standard_LRS -Location 'westeurope' -AsJob }
 
 ===============
+How to get subscription list in the portal
+Get-AzSubscription
+==========================
+Get-AzStorageAccount
+============================
+Select-AzSubscription -SubscriptionName "West US 2_Subscription"
+=================
+New-AzResourceGroup -Name rg03 -Location "westeurope"  (To create resourcegroup)
+============
+For perticular storage details
+Get-AzStorageAccount -Name reg2appstorage -ResourceGroupName reg2-storage
+======================
+Get-AzStorageAccount -Name reg2appstorage -ResourceGroupName reg2-storage | Format-List ( for more details)
+=================================
+$stdetail = Get-AzStorageAccount -Name reg2appstorage -ResourceGroupName reg2-storage  (To assign the variable run this command  and next time you can run $stdetails instead of FULL COMMAND)
+EX:-
+$stdetail.StorageAccountName
+=====================
