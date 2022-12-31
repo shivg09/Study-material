@@ -1,5 +1,7 @@
 https://www.google.com/search?q=azure+powershell+tutorial&client=ubuntu&hs=r3y&channel=fs&biw=1528&bih=788&tbm=vid&sxsrf=ALiCzsbK7h49oCA6RUVTatqXJ6JibbZayg%3A1672407650711&ei=YuquY6b9KunZz7sPxMCOsAg&oq=azure+powershell+tutorial&gs_lcp=Cg1nd3Mtd2l6LXZpZGVvEAEYADIHCAAQgAQQDTIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBwgAEIAEEA0yBAgAEB4yBAgAEB4yBAgAEB46CggAELEDEIMBEEM6BQgAEIAEUJsMWNYRYJMzaABwAHgAgAGwA4gBrxWSAQUzLTUuMpgBAKABAcABAQ&sclient=gws-wiz-video#fpstate=ive&vld=cid:5d8f8dda,vid:LbGNQVbb_VI
 =================================
+https://www.google.com/search?q=azure+powershell+use+cases&client=ubuntu&hs=jQN&channel=fs&sxsrf=ALiCzsbD3Dkf-tyhbJJ1mkFV1uikxAEU_Q%3A1672501318441&ei=RliwY_3CGtWIjuMP5rGyuAk&oq=azure+powershell+use+c&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQARgAMgUIIRCgATIFCCEQoAEyBQghEKABMggIIRAWEB4QHTIICCEQFhAeEB0yCAghEBYQHhAdMggIIRAWEB4QHTIICCEQFhAeEB0yCAghEBYQHhAdMggIIRAWEB4QHToKCAAQRxDWBBCwAzoHCAAQsAMQQzoECCMQJzoECAAQQzoFCAAQgAQ6BggAEBYQHjoFCAAQhgNKBAhBGABKBAhGGABQ5ghYsUdgwFpoAXABeACAAdYDiAH8DpIBCTAuMS4xLjIuMpgBAKABAcgBCsABAQ&sclient=gws-wiz-serp#fpstate=ive&vld=cid:d6f6d65f,vid:WcFKvrvzNSs
+=====================================
 
 Connect-AzAccount -SubscriptionId adf7b698-fc97-47a3-bd56-6993765abbba
 Get-Az 
