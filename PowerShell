@@ -66,3 +66,13 @@ Command to create storage account
 New-AzStorageAccount -Name bcstorageacname -Location westeurope -SkuName Standard_LRS -ResourceGroupName bc.rg  
 
 ===================
+Fetch Number of VM's in the perticular resource group (resource group name is- OD-ERP-RESGRP)
+Get-AzVM -ResourceGroupName OD-ERP-RESGRP
+======================
+(Command ko variable ke sath user karna)
+Get-AzVM
+$vms = Get-AzVM
+$vms.Count (it will show vm count)
+$vms.Name (it will show vm name of the subscription)
+=====================
+Start-AzVM -Name OD-DB-1 -ResourceGroupName OD-ERP-RESGRP (VM Start karne ke liye)
