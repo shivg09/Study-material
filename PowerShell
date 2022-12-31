@@ -86,7 +86,7 @@ Script name (vmstop.ps1)
 
 Get-AzVM ( command)
 $vms = Get-AzVM  ( command ko variable pe put kiya hai)
-foreach($vmdetails -in $vms)
+foreach($vmdetails in $vms)
 {
 $vmname = $vmdetails.Name
 $vmrg = $vmdetails.ResourceGroupName
