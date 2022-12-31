@@ -76,3 +76,19 @@ $vms.Count (it will show vm count)
 $vms.Name (it will show vm name of the subscription)
 =====================
 Start-AzVM -Name OD-DB-1 -ResourceGroupName OD-ERP-RESGRP (VM Start karne ke liye)
+============
+Get-AzVM -Name OD-DB-1 -ResourceGroupName od-erp-resgrp -Status  (VM start hai ya start checck karne ke liye)
+
+==================================
+
+(Script name stop multiple vm using powershell script 
+Script name (vmstop.ps1)
+
+Get-AzVM ( command)
+$vms = Get-AzVM  ( command ko variable pe put kiya hai)
+foreach($vmdetails -in $vms)
+{
+$vmname = $vmdetails.Name
+$vmrg = $vmdetails.ResourceGroupName
+Stop-AzVM -ResourceGroupName $vmrg -Name $vmname -Force
+}
