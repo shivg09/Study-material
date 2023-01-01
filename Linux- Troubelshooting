@@ -1,4 +1,6 @@
 
+https://www.nightwolf.in/nightwolf-cotribution/linux_L3/
+==================
 The Apache server allows 150 concurrent connections by default and drops any further additional requests. Since you are using default configs, this is most likely why the server couldn't handle 1000 requests at the same time.
 
 To alter this configuration, we can use the Apache MPM module.
@@ -9,18 +11,18 @@ To alter this configuration, we can use the Apache MPM module.
 
    Worker mode is the most widely used and recommended. Based on the output, we can change the mode if needed.
 
-2. Once the mode is set to Worker, we need to make changes to the configuration file found at /etc/apache2/mods-available/mpm_worker.conf
-    Please take a backup of the configuration file before making any changes.
-    The current configuration might look like this
-<IfModule mpm_worker_module>
-        StartServers                     2
-        MinSpareThreads          25
-        MaxSpareThreads          75
-        ThreadLimit                      64
-        ThreadsPerChild          25
-        MaxRequestWorkers         150
-        MaxConnectionsPerChild   0
+
+<IfModule mpm_prefork_module>
+StartServers 5
+MinSpareServers  5
+MaxSpareServers 10
+MaxRequestWorkers  150   ( INCREASE TO 1500 )
+MaxConnectionsPerChild   0
 </IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+seroadmin@riyadhotp:~$ cat /etc/apache2/mods-available/mpm_prefork.conf
+
      It is allowing a maximum of 150 concurrent connections.
      ==========================================================================================================
      
@@ -33,5 +35,13 @@ To alter this configuration, we can use the Apache MPM module.
       ulimit Hn
       ulimit Sn
       =====
+      
+      Applllication logs are writen in storage in real time that can slow the server performance.
+      
+      =========================
+      Fstab entry mount option set
+      Mount Options like: noatime - (covers norelatime/nodiratime) Can be enabled only via fstab
+      Linux records information about when files were created and last modified as well as when it was last accessed. 
+      ==================
       
      
