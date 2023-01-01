@@ -1,0 +1,37 @@
+
+The Apache server allows 150 concurrent connections by default and drops any further additional requests. Since you are using default configs, this is most likely why the server couldn't handle 1000 requests at the same time.
+
+To alter this configuration, we can use the Apache MPM module.
+
+1. MPM has 3 modes: prefork, event, and worker. Please run the below commands to confirm the mode of MPM currently enabled on your server: 
+   apache2ctl -V
+   a2query -M
+
+   Worker mode is the most widely used and recommended. Based on the output, we can change the mode if needed.
+
+2. Once the mode is set to Worker, we need to make changes to the configuration file found at /etc/apache2/mods-available/mpm_worker.conf
+    Please take a backup of the configuration file before making any changes.
+    The current configuration might look like this
+<IfModule mpm_worker_module>
+        StartServers                     2
+        MinSpareThreads          25
+        MaxSpareThreads          75
+        ThreadLimit                      64
+        ThreadsPerChild          25
+        MaxRequestWorkers         150
+        MaxConnectionsPerChild   0
+</IfModule>
+     It is allowing a maximum of 150 concurrent connections.
+     ==========================================================================================================
+     
+     cat /proc/sys/fs/file-max
+        OR
+      CAt /etc/sysctl.conf
+      fs.file-max 100000
+      sysctl -p
+      ========================
+      ulimit Hn
+      ulimit Sn
+      =====
+      
+     
