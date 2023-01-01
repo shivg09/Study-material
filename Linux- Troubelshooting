@@ -44,4 +44,5 @@ seroadmin@riyadhotp:~$ cat /etc/apache2/mods-available/mpm_prefork.conf
       Linux records information about when files were created and last modified as well as when it was last accessed. 
       ==================
       
-     
+     https://www.geeksforgeeks.org/difference-between-process-and-thread/  (Process & Thread diff)
+     ===========
