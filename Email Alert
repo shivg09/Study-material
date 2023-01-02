@@ -1,0 +1,42 @@
+Nfs script( using email alert)
+
+https://chribonn.medium.com/howto-send-an-email-using-gmail-from-a-system-configuration-using-msmtp-and-heirloom-mailx-ubuntu-1cb2bace0c33
+
+Script will run from root not $ prompt
+
+
+-rw-r----- 1 root msmtp 227 May  6 15:56 /etc/msmtprc
+
+account default
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile /var/log/msmtp
+# gmail
+host smtp.gmail.com
+port 587
+from engineering@serosoft.com
+user engineering@serosoft.com
+password Engineering@2021
+
+
+
+===================================
+
+++++++++++++++++++++++++++++++++++++++++++
+/etc/mail.rc
+set sendmail=”/usr/bin/msmtp”
+
+------------------------------
+
+root@Stasy-Prod-Msg-Server:/etc# cat /opt/nfs1.sh 
+#!/bin/bash
+servername=`hostname`
+count=$(df -h |grep v2_uploads |wc -l)
+if [ $count -eq 0 ]; then
+sudo mount -t nfs 12.0.7.8:/opt/serosoft/v2_uploads /opt/serosoft/v2_uploads
+echo "NFS got unmounted on server $servername and was remounted. Please check the issue."|mail -s "NFS got unmounted on Server: $servername" build@serosoft.in, sandeep.garg@serosoft.in, shiv.gurjar@serosoft.in, santosh.sahu@serosoft.in, ankur.agrawal.serosoft.in, ankur.g@serosoft.in
+fi
+
+Crontab -l
+*/5 * * * * sh /opt/nfs1.sh
