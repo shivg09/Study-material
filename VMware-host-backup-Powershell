@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=JueNxautpmo
+
+PS /home/ Connect-VIserver -server 192.168.13.34 (vmware esxi host ip)
+PS: /home/ Get-VMHostFirmware -VMHost 192.168.13.34 -BackupConfiguration -DestinationPath c:\ESXI_bkp
+PS:/home/  Set-VHost -VHost 192.168.174.128 -State 'Maintanance'
+Set-VMHostFirmware -VMhost 192.168.174.128 -Restore -SourcePath c:/ESXI_bkp/confgiuration.tgz
