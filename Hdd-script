@@ -1,0 +1,6 @@
+
+
+df -h / |grep -vE "Use%" |awk '{print $5}' |sed 's/%//gi'
+
+
+https://www.youtube.com/watch?v=yXhdDV13nrA
