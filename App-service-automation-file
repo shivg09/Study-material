@@ -1,0 +1,36 @@
+try
+{
+    # use Azure As Account to log in Azure
+    $servicePrincipalConnection=Get-AutomationConnection -Name "AzureRunAsConnection"      
+
+    Write-Output $servicePrincipalConnection.TenantId
+    Write-Output $servicePrincipalConnection.ApplicationId
+    Write-Output $servicePrincipalConnection.CertificateThumbprint
+
+    Add-AzAccount `
+        -ServicePrincipal `
+        -TenantId $servicePrincipalConnection.TenantId `
+        -ApplicationId $servicePrincipalConnection.ApplicationId `
+        -CertificateThumbprint $servicePrincipalConnection.CertificateThumbprint 
+}
+catch {
+    if (!$servicePrincipalConnection)
+    {
+        $ErrorMessage = "Connection $connectionName not found."
+        throw $ErrorMessage
+    } else{
+        Write-Error -Message $_.Exception
+        throw $_.Exception
+    }
+}
+
+
+Stop-AzWebApp -ResourceGroupName anantustaging-rg -Name anantustaging
+
+Stop-AzWebApp -ResourceGroupName iiitb-rg-asr -Name iiitbdemo-app
+
+Stop-AzWebApp -ResourceGroupName ku-demo-app-rg -Name Kudemo-App
+
+Stop-AzWebApp -ResourceGroupName webapp-rg -Name shivPetSample1
+
+Stop-AzWebApp -ResourceGroupName sis_training-rg -Name SIS-Training-APP 
