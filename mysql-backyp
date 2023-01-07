@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#This is backup script
+NOWTIME=$(date +"%d-%m-%Y-%H-%M")
+NOWDATE=$(date +"%m-%d-%Y")
+echo Taking backup ON $NOWTIME
+
+mkdir /home/DBNAME/pathname/backup/$NOWDATE
+
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF DBNAME > /home/DBNAME/pathname/backup/$NOWDATE/DBNAME-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF  DBNAME_audit > /home/DBNAME/pathname/backup/$NOWDATE/DBNAME_audit-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF  academia_DBNAME > /home/DBNAME/pathname/backup/$NOWDATE/academia_DBNAME-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF DBNAME_applynow > /home/DBNAME/pathname/backup/$NOWDATE/DBNAME_applynow-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF alumnee_DBNAME > /home/DBNAME/pathname/backup/$NOWDATE/alumnee_DBNAME-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF limedb > /home/DBNAME/pathname/backup/$NOWDATE/limedb-$NOWTIME.sql
+mysqldump --user=ss_root --host=localhost --port=3306 --password=s3r0s0ft --routines --events --databases --set-gtid-purged=OFF limedb_demo > /home/DBNAME/pathname/backup/$NOWDATE/limedb_demo-$NOWTIME.sql
+
+
+cd /home/DBNAME/pathname/backup/$NOWDATE
+tar -cf dbbackups-$NOWTIME.tar *$NOWTIME.sql
+gzip dbbackups-$NOWTIME.tar
+rm -rf *$NOWTIME.sql
+
+#Script for v2upload & V1 File & Images
+tar -cvpzf /home/DBNAME/pathname/backup/$NOWDATE/$NOWTIME-v2_upload_mainbackup.tar.gz /home/DBNAME/pathname/v2_uploads
+tar -cvpzf /home/DBNAME/pathname/backup/$NOWDATE/$NOWTIME-v1_backup.tar.gz /home/DBNAME/pathname/v1-tomcat/tomcat/webapps/academia_DBNAME/files /home/DBNAME/pathname/v1-tomcat/tomcat/webapps/academia_DBNAME/images
+
+#script to delete old backup more than 10 days
+echo K5HbdFtUpGs86c8%+!D | sudo -S find /home/DBNAME/pathname/backup/* -mtime +3 -exec rm -rf {} \;
