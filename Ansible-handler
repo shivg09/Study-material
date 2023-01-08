@@ -1,0 +1,44 @@
+---
+- hosts: all
+  tasks:
+    - name: change file
+      replace:
+       path: /var/www/html/index.html
+       regexp: 'ip: 192.168.122.44'
+       replace: 'ip: 192.168.122.4456'
+
+- handlers:
+      - name: Restart nginx
+        service:
+          name: nginx
+          state: restarted
+~                                                                               
+~                                                                               
+~                          
+====================================================
+---
+- hosts: all
+  tasks:
+    - name: nginx repo
+      yum: name=epel-release state=present
+    - name: nginx installation
+      yum: name=nginx state=latest
+
+    - name: copy
+      copy:
+        src: /root/index.html
+        dest: /var/www/html
+      notify: Restart nginx
+
+   # - name: Service start
+   #   service:
+   #     name: nginx
+   #     state: started
+   #     enabled: yes
+
+- handlers:
+      - name: Restart nginx
+        service:
+          name: nginx
+          state: restarted
+~                         
