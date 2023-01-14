@@ -1,0 +1,10 @@
+#!/bin/bash
+ping -c3 google.com
+
+if [ $? -eq 0 ]
+then
+echo "sucess"
+else
+echo "not sucess"
+fi
+
