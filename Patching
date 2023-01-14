@@ -1,0 +1,36 @@
+# Tyep of patches
+Security patches,  bug fixes, enhancement, OS update, Critical updates.
+#
+Toot- Manage Engine patch manager plus
+https://www.google.com/search?q=linux+server+patching+step+by+step+pdf&client=ubuntu&hs=Gin&channel=fs&sxsrf=AJOqlzUC2jN-8BVjkZdqM0YGSDwSOGEnAQ%3A1673714508056&ei=TNvCY-z6AsCYseMPsNG_mAQ&oq=linux+patching+with+skip+http+patches&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQARgBMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADMgoIABBHENYEELADSgQIQRgASgQIRhgAUABYAGDoY2gBcAF4AIABAIgBAJIBAJgBAMgBCMABAQ&sclient=gws-wiz-serp#fpstate=ive&vld=cid:d30fdcd1,vid:nKlbF7aSq7Y
+
+yum history info 2
+yum history undo
+https://access.redhat.com/solutions/64069
+yum history info 8  (to see the id details)
+yum history undo 8  ( roll back karne ke liye)
+
+#rhn_register ( it will ask for username/passwd) and we will get new repo in local system
+Yum update ( it will update all package)
+Yum repolist(to see repo in local system
+Yum check-update( to check how many package to be updated)
+Yum updateinfo summary
+Yum updateinfo –security
+Yum update –security ( to install only security package)
+Yum clean all
+Reboot
+#######Rollback
+Yum history   ( to see what package installed which need to be rollback)
+Yum history undo 7 ( 7 is the id)
+https://bobcares.com/blog/centos-patching-best-practices/
+
+++++++
+Kernel upgrade
+https://www.howtoforge.com/tutorial/how-to-upgrade-kernel-in-centos-7-server/
+https://www.tecmint.com/install-upgrade-kernel-version-in-centos-7/
+grub2-set-default 0
+grub2-mkconfig -o /boot/grub2/grub.cfg
+package-cleanup --oldkernels
+or change into pen and edit the file /etc/default/grub and set GRUB_DEFAULT=0. This means that the first kernel in the GRUB 
+
+
