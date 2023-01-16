@@ -1,0 +1,237 @@
+ Total ticke
+project="Serosoft Server" and "IssueOwner[User Picker (single user)]"=5bdafffc4950c62d34052b and createdDate >= 2021-08-01 AND createdDate <= "2021-08-31 23:59" 
+
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 5bdafffc40c62dde34052b  AND createdDate >= 2022-03-01 AND createdDate <= 2022-05-31
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 5bdafffc4950c6dde34052b  AND createdDate >= 2022-06-01 AND createdDate <= 2022-08-31
+
+Total 453+631=1084
+to
+project = "Serosoft Server" AND status not in (open, done, Review ) ORDER BY created DESC
+
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 5bdafffc4c62dde34052b  AND createdDate >= 2022-06-01 AND createdDate <= 2022-10-31
+
+Close ticket
+
+project="Serosoft Server" and "IssueOwner[User Picker (single user)]"=5bdafffc49502dde34052b and createdDate >= 2021-03-01 AND createdDate <= "2021-07-31 23:59" and status not in(Open,"In Progress",Created)
+
+Reopen
+
+project="Serosoft Server" and "IssueOwner[User Picker (single user)]"=5fb51c80aca10c00692f67ed and createdDate >= 2022-03-01 AND createdDate <= "2022-8-31 23:59" and status was in ("To Do")
+
+Reopen 8
+
++++++++++++++++++++++++++++
+
+assignee = 60ae050e9f06a6007072e0ac AND status in (Closed, "In Progress"  )
+===============
+
+Jira Training  12Oct
+
+To see all tickers which are assigned to me
+
+project = "Serosoft Server" AND assignee  =  5f8802bb7441ea2424c2
+
+To see monthly ASR using this query
+project = ASR AND IssueOwnerSetOn >= 2021-11-01 AND IssueOwnerSetOn <= 2021-11-30 ORDER BY created DESC
+
+project = "Serosoft Server" AND "IssueOwnerSetOn[Date]" >=  2021-11-01 AND "IssueOwnerSetOn[Date]" <= 2021-11-30  ORDER BY created DESC
+
+
+=======================
+Single day ticket query
+
+project = "Serosoft Server" AND createdDate >= "2022-08-23 00:01" AND createdDate <="2022-08-23 23:59"
+
+++++++++++++
+
+Abhishek Mhaski ticket details
+24-05-2021 Joining
+
+May21 to Oct21
+
+
+For total ticket (915)
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050d9cf57b007108c5db AND createdDate >= "2021-05-01" AND created <= "2021-10-30"
+
+==========================
+Closed (915)
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050d9cf57b007108c5db AND createdDate >= "2021-05-01" AND created <= "2021-10-30" AND status not in (Open, Created, "In Progress")
+++++++++++
+
+Reopen 15 ticket
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050d9cf57b007108c5db AND createdDate >= "2021-05-01" AND createdDate <= "2021-10-30" AND status was in ("To Do")
+
+++++++++++++++++++++++++++++++
+
+Rahul Patel
+
+May21 to Oct21
+
+Total ticket (878)
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050e9f06a6007072e0ac AND createdDate >= "2021-05-01" AND created <= "2021-10-30"
+
+Closed
+
+Closed (878)
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050e9f06a6007072e0ac AND createdDate >= "2021-05-01" AND created <= "2021-10-30" AND status not in (Open, Created, "In Progress")
+
+
+Reopen
+Reopen (13)
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 60ae050e9f06a6007072e0ac AND createdDate >= "2021-05-01" AND created <= "2021-10-30" AND status was in ("To Do")
+
+++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++
+
+Cost Optimization
+VPN Tunnel of Serosoft_Mumbai_VPN
+
+
+Remoed LOB of Bhabha server with 3 web server,
+
+
+Remoed WAF from testing security
+
+
+Removed static IP Addresses
+
+
+PGI-AppServerVM (Removed after snapshot)
+
+
+TSG-DB-Server-VM (Removed after snapshot)
+
+
+TSG-live (Removed after Snapshot)
+
+
+Falsebay-DB-Replica (Removed After Snapshot)
+
+
+Temstasy upgraded and dicreaased hdd from 2TB to 1TB
+
+
+Buzz-uat replica vm (Deleted)
+
+
+Koha-Dev-VM (Deleted)
+
+
+Koha-server (Deleted)
+
+
+ruk-demo (Deleted)
+
+
+ruk-live (Deleted)
+
+
+Pgina-DemoVM
+
+
+rdps-nonacademic
+
+
+rgilive-osdisk-20210809-055111 (live hdd from testing)
+
+
+sislivevm-osdisk-20210830-085203 (live hdd from training vm)
+
+
+
++++++++++++++++++++++++
+
+
+Shiv  Anual Review Ticket
+
+ 2020-10-16 to 2021-10-15
+
+Total Ticket  1512
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 5f8802bb7441ea00682424c2 AND createdDate >= "2020-10-16" AND created <= "2021-10-15"
++++++++++++++++++++
+Closed ticket 1512
+
+project = "Serosoft Server" AND "IssueOwner[User Picker (single user)]" = 5f8802bb7441ea00682424c2 AND createdDate >= "2020-10-16" AND created <= "2021-10-15" AND status not in (Open, Created, "In Progress")
+
+==================
+
+Somesh 16 Feb
+
+972
+createdDate >= 2020-11-01 AND createdDate <= 2021-01-30
+–
+695
+2021-02-01 AND createdDate <= 2021-03-30
+–
+927
+ 2021-04-01 AND createdDate <= 2021-06-30
+–
+820
+2021-07-01 AND createdDate <= 2021-9-30
+–
+
+236
+2021-10-01 AND createdDate <= 2021-10-30
+
+Total ticket 3650
+
+Completed 3650
+
+Reopen 
+20+19+15+14+1
+Total Reopen =69
+++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+Ashish Patel
+12 April 2022
+Total 1906
+Completed 1906
+TO DO 20
+
+
+Good Areas
+Hard working
+Areas of Improvement
+Troubleshooting Work and leadership skills
+Target for next 6M
+Focus on automation
+Promotion recommendation
+Yes
+Reason for promotion (if yes)
+Yes, He has deep knowledge of our infra setup so we can promote on next level.
+
+
