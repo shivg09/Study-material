@@ -17,7 +17,11 @@ git show commit id ( to see what canges was made)
 
 Fast fast forward merge( no change in existing file only created new file is called fast forward merge)
 recursive merge ( Master brancch me file already hai aur feature b branch create karne ke baad feature b me bhi file show hone lagegi,
-aur phir hum master me master wali file(jo master branch me bani hai) me change karenge to wo recursive merge hoga)
+aur phir hum maste1r me master wali file(jo master branch me bani hai) me change karenge to wo recursive merge hoga) 
+( jab two branch me file hoti hai aur change sirf ek branch me hota hia tab isko recursive chane bolte hai)
+
+Coflict merge  ( jab master branch me bhi same file (file1) me change ho aur feature-c branch me bhi file1 me change ho and then merge 
+feature-c branch to master then it will be confilct merge )
 =============
 git stash
 git rebase
