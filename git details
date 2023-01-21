@@ -1,0 +1,24 @@
+Three area in git
+Git Repository .git file in the folder is called repository)
+staging area 
+Working directory (folder where you are working )
+=======================================================
+
+Git states
+Committed (files which are already commentied into repository)
+Staged ( that version of file is coppied into stage area
+Modified (file which is diff from working directory and respository)
+untracted  (its new file which is in folder before add )
+===============================
+
+git log --oneline --graph --all (to see the details who change and when change)
+git show commit id ( to see what canges was made)
+
+
+Fast fast forward merge( no change in existing file only created new file is called fast forward merge)
+recursive merge ( Master brancch me file already hai aur feature b branch create karne ke baad feature b me bhi file show hone lagegi,
+aur phir hum master me master wali file(jo master branch me bani hai) me change karenge to wo recursive merge hoga)
+=============
+git stash
+git rebase
+git conflict(3 type)
