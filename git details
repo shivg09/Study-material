@@ -21,7 +21,7 @@ aur phir hum maste1r me master wali file(jo master branch me bani hai) me change
 ( jab two branch me file hoti hai aur change sirf ek branch me hota hia tab isko recursive chane bolte hai)
 
 Coflict merge  ( jab master branch me bhi same file (file1) me change ho aur feature-c branch me bhi file1 me change ho and then merge 
-feature-c branch to master then it will be confilct merge )
+feature-c branch to master then it will be confilct merge )  (dono file me newer versioon ho tab hota hai ye)
 =============
 git stash
 git rebase
