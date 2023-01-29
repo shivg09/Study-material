@@ -1,0 +1,62 @@
+kubectl run apache-bench -i --tty --rm --image=httpd -- ab -n 500000 -c 1000 http://shivgnginx.default.svc.cluster.local/  ( TO PROVIDE THE LOAD)
+
+=====================
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: shivgnginx 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shivgnginx
+  template:
+    metadata:
+      labels:
+        app: shivgnginx 
+    spec:
+      containers:
+        - name: shivgnginx 
+          image: regacr001.azurecr.io/shivg09/nginx-1:#{Build.BuildId}#
+          ports:
+          - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: shivgnginx
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 80 
+    selector:
+        app: shivgnginx
+        
+        
+=============================================
+HPA yaml file
+
+shivprashad@shiv:~/sd$ cat hpa.yaml 
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: shivgnginx
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: shivgnginx
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+
+=====================================
+kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://hpa-demo-deployment; done"
+============================
+OR
+kubectl run apache-bench -i --tty --rm --image=httpd -- ab -n 500000 -c 1000 http://shivgnginx.default.svc.cluster.local/   (shivgnginx is a service name)
