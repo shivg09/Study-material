@@ -58,6 +58,6 @@ spec:
  ====================  generate load over application ================
  
 kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://hpa-demo-deployment; done"
-
-
 ============================
+OR
+ubectl run apache-bench -i --tty --rm --image=httpd -- ab -n 500000 -c 1000 http://shivgnginx.default.svc.cluster.local/   (shivgnginx is a service name)
