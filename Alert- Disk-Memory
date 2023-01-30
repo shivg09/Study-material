@@ -1,0 +1,25 @@
+
+
+academia@erpliveapp:~$ sudo cat /root/memoryalert.sh
+#!/bin/bash
+
+free=$(free -mt | grep Total | awk '{print $4}')
+
+## check if free memory is less or equals to 3000MB
+if [ "$free" -le 1000 ]; then
+
+	## send email if system memory is running low
+        echo "Warning, server memory is running low!\n\nFree memory: $free MB" | mail -s 'Low Memory alert of AU-Live app' build@serosoft.in
+fi
+
+exit 0
+
+academia@erpliveapp:~$ sudo cat /root/hddalert.sh
+#!/bin/bash
+CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
+THRESHOLD=95
+if [ "$CURRENT" -gt "$THRESHOLD" ] ; then
+mail -s 'Disk Space Alert' build@serosoft.in << EOF
+AU-live app-server Disk space is very low. Used: $CURRENT%
+EOF
+fi
