@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#This is backup script
+NOWTIME=$(date +"%d-%m-%Y-%H-%M")
+NOWDATE=$(date +"%m-%d-%Y")
+echo Taking backup ON $NOWTIME
+
+mkdir /Erp_Backup/$NOWDATE
+
+mysqldump --user=ss_root --host=10.31.860.45 --port=13306 --password=s3r60s0ft --routines --events --databases --set-gtid-purged=OFF au > /Erp_Backup/$NOWDATE/au-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.31.860.45 --port=13306 --password=s365r0s0ft --routines --events --databases --set-gtid-purged=OFF au_audit > /Erp_Backup/$NOWDATE/au_audit-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.31.806.45 --port=13306 --password=s3r560s0ft --routines --events --databases --set-gtid-purged=OFF academia_au > /Erp_Backup/$NOWDATE/au_v1-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.31.860.45 --port=13306 --password=s3r560s0ft --routines --events --databases --set-gtid-purged=OFF au_alumni > /Erp_Backup/$NOWDATE/au_alumni-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.31.860.45 --port=13306 --password=s3r560s0ft --routines --events --databases --set-gtid-purged=OFF au_applynow > /Erp_Backup/$NOWDATE/au_applynow-$NOWTIME.sql
+#mysqldump --user=ss_root --host=10.31.860.45 --port=3306 --password=s3r560s0ft --routines --events --databases --set-gtid-purged=OFF koha_webpac > /Erp_Backup/$NOWDATE/koha_webpac-$NOWTIME.sql
+mysqldump --user=ss_root --host=10.31.850.45 --port=13306 --password=s3r056s0ft --routines --events --databases --set-gtid-purged=OFF au_moodle > /Erp_Backup/$NOWDATE/au_moodle-$NOWTIME.sql
+
+cd /Erp_Backup/$NOWDATE
+tar -cf dbbackups-$NOWTIME.tar *$NOWTIME.sql
+gzip dbbackups-$NOWTIME.tar
+rm -rf *$NOWTIME.sql
+
+#Script for v2upload
+tar -cvpzf /Erp_Backup/$NOWDATE/$NOWTIME-v2_upload.tar.gz /home/academia/serosoft/installation/v2_uploads/au
+
+#Script for v1-backup
+tar -cvpzf /Erp_Backup/$NOWDATE/$NOWTIME-v1_images.tar.gz /home/academia/serosoft/installation/v1-tomcat/tomcat/webapps/au_nonacad/images
+tar -cvpzf /Erp_Backup/$NOWDATE/$NOWTIME-v1_files.tar.gz /home/academia/serosoft/installation/v1-tomcat/tomcat/webapps/au_nonacad/files
+
+echo sero#au17# | sudo -S find /Erp_Backup/ -type d -mtime +5 -exec rm -rf {} \;
+academia@erpliveapp:~$ 
