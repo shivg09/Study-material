@@ -1,0 +1,16 @@
+
+To avoid connect-AzAccount login we are using service principle
+#First we need to create object using AD-> app-registration->appname (powershell-app)
+
+$ResourceGroupName="powershell-rgp"
+$Location="North Europe"
+
+$AppId="ete8734243o53532o5u"
+$AppSecret="dsfjosiurweotow"
+
+$SecureSecret = $AppSecret |ConvertTo-SecureString -AsPlainText -Force
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $AppId,$SecureSecret
+
+$TenantID="dfsgdsgdsgo8yodsg"
+Connect-AzAccount -ServicePrinciple -Credential $Credential -Tenant $TenantID
+New-AzResourceGroup -Name $ResourceGroupName -Location $Location
