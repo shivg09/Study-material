@@ -1,0 +1,50 @@
+#Network creation
+shivprashad@shiv:~/newvm$ cat newvm.ps1 
+$ResourceGroupName ="powershell-grp"
+$Location="North europe"
+
+$VirtualNetworkName="App-network"
+$VirtualNetworkAddressSpace="10.0.0.0/16"
+
+$SubnetName="SubnetA"
+$SubnetAddressSpace="10.0.0.0/24"
+
+#Create the subnet resource
+
+$SubnetA=New-AzVirtualnetworkSubnetConfig -Name $SubnetName -AddressPrefix $SubnetAddressSpace
+
+#Create VirtualNetwork
+
+$VirtualNetwork = New-AzVirtualNetwork -Name $VirtualNetworkName -ResourceGroupName $ResourceGroupName -Location $Location  -AddressPrefix $VirtualNetworkAddressSpace  -Subnet $SubnetA
+
+'The Virtual Network Details'
+$VirtualNetwork
+
+=======================================
+#Network Interface
+
+shivprashad@shiv:~/newvm$ cat newvm-2.ps1 
+$ResourceGroupName ="powershell-grp"
+$VirtualNetworkName="App-network"
+$SubnetName="SubnetA"
+$Location="Northeurope"
+$VirtualNetwork = Get-AzVirtualNetwork -Name $VirtualNetworkName -ResourceGroupName $ResourceGroupName
+
+$Subnet = Get-AzVirtualNetworkSubnetConfig -Name $SubnetName -VirtualNetwork $VirtualNetwork
+
+$NetworkInterfaceName="app-interface"
+
+$NetworkInterface=New-AzNetworkInterface -Name $NetworkInterfaceName -ResourceGroupName $ResourceGroupName -Location $Location -Subnet $Subnet
+
+$NetworkInterface
+
+=======================================
+Network Security Group
+
+
+
+
+
+
+
+
