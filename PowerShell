@@ -13,8 +13,10 @@ Get-AzResourceGroup  (To Check existing resource group in subscription or subscr
 Get-AzResourceGroup |select ResourceGroupName, Location  (To check the resource group name and location )
 
 Get-AzVM -ResourceGroupName test.rg | select ResourceGroupName, Location, Name (Resource group me vm kitni hai selected infromation ke liye) 
+Get-AzResourceGroup |select ResourceGroupName, Location
 
 get-AzResourceGroup |Where-Object { $_.Location -eq 'westeurope' }  
+ Get-AzResourceGroup | Where-Object {$_.Location -eq "centralindia"} | select ResourceGroupName, Location
 
 Get-AzResourceGroup | Where-Object {$_.Location -eq 'westeurope'} | select ResourceGroupName, Location
  Get-AzVM -ResourceGroupName test.rg |select Name, Location  (Resource Grop me kitni vm hai )
@@ -67,6 +69,15 @@ Remove-AzStorageAccount -Name $name -ResourceGroupName $rg force
 ==============================
 Command to create storage account
 New-AzStorageAccount -Name bcstorageacname -Location westeurope -SkuName Standard_LRS -ResourceGroupName bc.rg  
+==========
+Looping
+$rg="test1.rg"
+$location="centralindia"
+foreach ($i in 1.. 3)
+{
+New-AzStorageAccount -ResourceGroupName $rg -Name "storagemypersonao$i" -SkuName Standard_LRS -Location $location 
+
+}
 
 ===================
 Fetch Number of VM's in the perticular resource group (resource group name is- OD-ERP-RESGRP)
@@ -94,4 +105,5 @@ foreach($vmdetails in $vms)
 $vmname = $vmdetails.Name
 $vmrg = $vmdetails.ResourceGroupName
 Stop-AzVM -ResourceGroupName $vmrg -Name $vmname -Force
+#Start-AzVM -ResourceGroupName $vmrg -Name $vmname 
 }
