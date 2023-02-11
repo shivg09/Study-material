@@ -17,6 +17,7 @@ Get-AzVM -ResourceGroupName test.rg | select ResourceGroupName, Location, Name (
 get-AzResourceGroup |Where-Object { $_.Location -eq 'westeurope' }  
 
 Get-AzResourceGroup | Where-Object {$_.Location -eq 'westeurope'} | select ResourceGroupName, Location
+ Get-AzVM -ResourceGroupName test.rg |select Name, Location  (Resource Grop me kitni vm hai )
 
 ============================================================
 (BELOW COMMAND TO SEE THE PROPER FORMAT)
