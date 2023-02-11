@@ -12,6 +12,8 @@ Get-AzResourceGroup  (To Check existing resource group in subscription or subscr
 
 Get-AzResourceGroup |select ResourceGroupName, Location  (To check the resource group name and location )
 
+Get-AzVM -ResourceGroupName test.rg | select ResourceGroupName, Location, Name (Resource group me vm kitni hai selected infromation ke liye) 
+
 get-AzResourceGroup |Where-Object { $_.Location -eq 'westeurope' }  
 
 Get-AzResourceGroup | Where-Object {$_.Location -eq 'westeurope'} | select ResourceGroupName, Location
