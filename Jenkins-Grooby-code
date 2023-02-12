@@ -1,0 +1,35 @@
+
+## https://www.youtube.com/watch?v=gdbA3vR2eDs
+node{
+  stage('SCM Chekout"){
+#use pipeline script to geth the checkout url  (git)
+      git credentialID: 'git-creds', url: https://github.com/javahometech/my-app'
+     ##  git (credentialID: 'git-creds', url: https://github.com/javahometech/my-app',branch: 'dev-branch')
+}
+#use script for mvn package( select shell sh: Shell Script and in shell script -  mvn clean package and click on generate script)
+stage('Mvn Package') {
+def mvnHome = tool name: 'maven-3', type: 'maven'
+def mvnCMD = "${mvnHome}/bin/mvn"
+sh "${mvnCMD} clean package"
+}
+#Docker should be installed on jenkins & make sure jenkins user has permission to call docker command
+stage('Build Docker Image'){
+sh 'docker build -t kammana/my-app:2.0.0 .' 
+}
+#make sure login in docker hub & pipleline script "withCredentials"  use for docker login , fill doker hub crednetial injenkins
+stage('Push Docker Image'){
+ withCredentials([string(credentialsId: 'docker-pwd'. variable: 'dockerHubPwd')]) {
+sh "doker login -u kammana -p ${dockerHubPwd}"
+}
+sh 'docker push kammana/my-app:2.0.0 ' 
+
+}
+#deploy container in dev server use pileline script (sshagent) mention the remote server credenial details
+stage('Run container on Dev Server'){
+def dockerRun = 'docker run -p 8080:8080 -d --name my-app kammana/my-app:2.0.0'
+sshagent(['dev-server']) {
+sh "ssh -o StrictHostKeyChecking=no ec2-user@172.34.68.139 ${dockerRun}"
+
+}
+}
+}
