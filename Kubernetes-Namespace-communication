@@ -1,0 +1,74 @@
+https://8gwifi.org/docs/kube-externalname.jsp
+
+In Kubernetes the namespace is used to isolate the resource, based on the use case services in different namespace may required to access the service located in another namespace and kubernetes allow this by using ExternalName concept.
+An ExternalName Service is a special case of Service that does not have selectors and uses DNS names instead.
+
+To demonstrate the ExternalName lets assume we have a service of mysql which is running on defualt namespace
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: default
+spec:
+  clusterIP: None
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    app: mysql
+  type: ClusterIP
+  =========================
+  root@kube-master-2:# kubectl exec -it busybox sh
+/ # ping -c1 mysql
+PING mysql (192.168.242.145): 56 data bytes
+64 bytes from 192.168.242.145: seq=0 ttl=63 time=0.068 ms
+
+--- mysql ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max = 0.068/0.068/0.068 ms
+/ # exit
+
+If some other pod in another namespace is try to access the mysql service, it will not able to resolve the DNS mysql as shown below,
+
+root@kube-master-2:# kubectl create ns playground
+root@kube-master-2:# kubectl apply -f busybox.yml -n playground 
+pod/busybox unchanged
+
+root@kube-master-2:# kubectl exec -it busybox sh -n playground 
+/ # 
+/ # ping -c2 mysql
+ping: bad address 'mysql'
+/ # exit
+To Access the mysql service in the default namespace we need to build a service with type ExternalName as shown below. The externalName must point to the namespace which we are trying to access on that namespace.
+
+mysql.default.svc.cluster.local
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: playground
+spec:
+  type: ExternalName
+  externalName: mysql.default.svc.cluster.local
+  ports:
+  - port: 3306
+Apply the configuration and check for the svc
+
+root@kube-master-2:# kubectl get svc -n playground 
+NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP                       PORT(S)    AGE
+mysql                  ExternalName   <none>          mysql.default.svc.cluster.local   3306/TCP   8s
+
+The ExternalName is configured properly, now different pod should be access the service mysql which is located in another namespace.
+
+root@kube-master-2:# kubectl exec -it busybox sh -n playground 
+/ # ping -c2 mysql
+PING mysql (192.168.242.145): 56 data bytes
+64 bytes from 192.168.242.145: seq=0 ttl=63 time=0.069 ms
+64 bytes from 192.168.242.145: seq=1 ttl=63 time=0.075 ms
+
+--- mysql ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.069/0.072/0.075 ms
+/ # exit
