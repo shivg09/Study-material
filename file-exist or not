@@ -1,0 +1,22 @@
+#!/bin/bash
+for i in *
+do
+if [ -d $i ] 
+then
+echo "$i"
+else
+echo "no files"
+fi
+done
+
+===========
+
+#!/bin/bash
+echo -n "enter the file name"
+read a
+if [ -f "$a" ]; then
+echo "File exists"
+else
+echo "File does not exist"
+fi
+~  
