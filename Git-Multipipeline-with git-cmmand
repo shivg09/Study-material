@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=B_2FXWI6CWg
+git checkout -b fix-123
+#to merge fix-123 branch to main  (after entering into main run the command git merge fix-123
+git branch -d fix-123
+#delete remote branch
+git push origin --delete fix-123
