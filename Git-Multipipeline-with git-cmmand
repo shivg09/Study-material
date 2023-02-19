@@ -9,3 +9,8 @@ git push origin fix-123
 git branch -d fix-123
 #delete remote branch
 git push origin --delete fix-123
+
+In Multipipelne we can skip the perticular branch which we don't want to build
+From Behaviour option in the jenkins we can include and skip perticular branch.
+
+for scan multipipeine webhook triger we can use this plugin to trigger for automatic scan.
