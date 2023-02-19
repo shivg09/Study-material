@@ -1,5 +1,10 @@
 https://www.youtube.com/watch?v=B_2FXWI6CWg
+
+#how to push branch in github 
 git checkout -b fix-123
+git push origin fix-123
+
+
 #to merge fix-123 branch to main  (after entering into main run the command git merge fix-123
 git branch -d fix-123
 #delete remote branch
