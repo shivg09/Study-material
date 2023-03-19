@@ -8,3 +8,15 @@ else
 echo "not sucess"
 fi
 
+====================================
+
+echo -n "username"
+read a
+grep -w $a /etc/passwd > /dev/null
+if [ $? -eq 0 ]
+then
+echo "existi"
+else
+echo "not exist"
+fi
+
