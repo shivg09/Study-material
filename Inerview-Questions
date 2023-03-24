@@ -51,5 +51,17 @@ ansible service status check
 terraform hdd increase
 ===============
 
+Storage account blob access from linux machine
+
+install the blobfuse package
+and create fuse_connection.cfg file
+and put the details inside the files
+accountname
+accountkey
+containername
+chmod 600 fuse_connection.cfg
+create mount point /mountfile
+#blobfuse ~/mountfile -tmp-path=/mnt/resource/blobfusetmp --config-file=/root/fuseconnection.cfg- o attr_timeout=240 -o entry_time=240 -onegative_timeout=120
+=================
 
 
