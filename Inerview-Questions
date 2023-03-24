@@ -12,8 +12,21 @@ du -ah |sort -rh |head -5
 find /root/ -type f -size +1G
 
 ===============
-in Ubuntu initrgfs issue
+in Ubuntu initrgfs issue in ubuntu 20.04
 it will show the initramfs prompt and it will show the partition above.
 so now we need to run fsck -y /dev/sda and then exit
 
 =============================
+IN Centos 7
+1-  boot from cd/dvd
+2-  In the grub screen to to troubleshooting and then rescue mode pe aana padega arrow se. then enter
+  then
+  mount to /mnt/sysimage using chroot /mnt/sysimage
+    then run command
+    dracut --regenerate-all -force
+    and then exit (for reboot server)
+  
+
+===============
+i node kaise check karenge
+aur increase
