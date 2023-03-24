@@ -38,5 +38,18 @@ dh -ih
 
 how to find perticuler line or word in remote server
 
+for i in `cat /root/hostlist`;
+
+do
+echo "$i"
+ssh $i uptime
+ssh $i grep "unix" samplefine
+done
+==============================
+ansible service status check
+==========================
+terraform hdd increase
+===============
+
 
 
