@@ -1,0 +1,6 @@
+Quest- to find the largest file size.
+
+du -ah |sort -rh |head -2
+find /root/ -type f -size +1G
+===================================
+How to fix initrd img file issue in patching
