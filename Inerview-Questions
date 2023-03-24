@@ -28,5 +28,11 @@ IN Centos 7
   
 
 ===============
-i node kaise check karenge
-aur increase
+Inode
+in a linux every file has data structure which container the file infromation like owner/group id / user id/ size and permission/ type of file. 
+and that data structure has perticular unique number called inode number
+check the inode number using 
+ls -i 
+dh -ih 
+
+
