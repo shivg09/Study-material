@@ -4,3 +4,16 @@ lsof -u shiv
 lsof -i TCP:1-1024
 
 https://geekstuffweb.wordpress.com/2016/07/12/linux-interview-questions-and-answers-for-l2-and-l3-engineers/
+
+===================
+file size more then 1gb show karega
+
+du -ah |sort -rh |head -5
+find /root/ -type f -size +1G
+
+===============
+in Ubuntu initrgfs issue
+it will show the initramfs prompt and it will show the partition above.
+so now we need to run fsck -y /dev/sda and then exit
+
+=============================
