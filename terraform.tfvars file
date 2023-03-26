@@ -1,0 +1,7 @@
+llocation = "Westeurope"
+resource_group_name = "new_rg1"
+virtual_network_name = "network1"
+subnet_name = "subnet_local"
+public_ip = "Newip3"
+virtual_machine = "vm-next-2"
+network_interface = "mynetwork_card4"
