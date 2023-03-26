@@ -1,0 +1,39 @@
+root@vm1:~/terraform# vim variable.tf
+description = "location name"
+default = "Westeurope"
+}
+
+variable "virtual_network_name" {
+
+type = string
+description = "network name"
+default = "network1"
+
+}
+
+variable "subnet_name" {
+
+type = string
+description = "subnet details"
+default = "subnet_local"
+
+}
+variable "public_ip" {
+
+type = string
+description = "pip details"
+default = "Newip"
+}
+variable "network_interface" {
+type = string
+description = "interface details1"
+default = "mynetwork_card2"
+}
+variable "virtual_machine" {
+
+type = string
+description = "vm details"
+default = "example-machine-2"
+}
+
+         
