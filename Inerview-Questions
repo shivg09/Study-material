@@ -49,6 +49,8 @@ done
 ansible service status check
 ==========================
 terraform hdd increase
+
+shell script to install nginx in multiple servers
 ===============
 
 Storage account blob access from linux machine
