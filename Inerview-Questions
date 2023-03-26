@@ -48,6 +48,8 @@ done
 ==============================
 ansible service status check
 ==========================
+terraform import resourcename.rg. ID
+
 terraform hdd increase
 
 shell script to install nginx in multiple servers
