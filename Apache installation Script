@@ -6,3 +6,18 @@ REMOTE=$(ssh $i free -gh |grep Mem | awk '{print $4}')
 #echo "$REMOTE" >> abc.csv
 ssh $i "bash -s" < /root/./http.sh >> /dev/null
 done
+
+
+===================
+
+for i in `cat /root/hostlist`;
+
+do
+
+
+#REMOTE=$(ssh $i free -gh |grep Mem | awk '{print $4}')
+#echo "$REMOTE" >> abc.csv
+#ssh $i "bash -s" < /root/./http.sh >> /dev/null
+SER=$(ssh $i grep "london" /root/kk/test >> output)
+echo "$SER"
+done
