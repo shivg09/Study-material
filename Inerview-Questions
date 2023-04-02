@@ -67,5 +67,29 @@ chmod 600 fuse_connection.cfg
 create mount point /mountfile
 #blobfuse ~/mountfile -tmp-path=/mnt/resource/blobfusetmp --config-file=/root/fuseconnection.cfg- o attr_timeout=240 -o entry_time=240 -onegative_timeout=120
 =================
+GDPR
+27013
+hardening
+intune endping management
+
+======
+INTUNE
+https://www.youtube.com/watch?v=rz8Z5bbe-II
+Step1
+account creation in intun 
+in google search intune trial and create user with the help of any email id and put the domain name
+
+step 2-  crate user in azure portal active directory and gropu and assign the license to group it will reflect on all the users which are in group
+step -3 go to active dicretory - mobility(mdm/mam) and select microsoft intue and add the group name
+
+step -4 on premise device se company portal setup down load karna hai and installation and login
+
+then the device will show in enpoint.microsoft.com portal
+
+------------------------
+
+
+
+
 
 
