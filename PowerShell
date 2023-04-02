@@ -3,6 +3,8 @@ https://www.google.com/search?q=azure+powershell+tutorial&client=ubuntu&hs=r3y&c
 https://www.google.com/search?q=azure+powershell+use+cases&client=ubuntu&hs=jQN&channel=fs&sxsrf=ALiCzsbD3Dkf-tyhbJJ1mkFV1uikxAEU_Q%3A1672501318441&ei=RliwY_3CGtWIjuMP5rGyuAk&oq=azure+powershell+use+c&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQARgAMgUIIRCgATIFCCEQoAEyBQghEKABMggIIRAWEB4QHTIICCEQFhAeEB0yCAghEBYQHhAdMggIIRAWEB4QHTIICCEQFhAeEB0yCAghEBYQHhAdMggIIRAWEB4QHToKCAAQRxDWBBCwAzoHCAAQsAMQQzoECCMQJzoECAAQQzoFCAAQgAQ6BggAEBYQHjoFCAAQhgNKBAhBGABKBAhGGABQ5ghYsUdgwFpoAXABeACAAdYDiAH8DpIBCTAuMS4xLjIuMpgBAKABAcgBCsABAQ&sclient=gws-wiz-serp#fpstate=ive&vld=cid:d6f6d65f,vid:WcFKvrvzNSs
 =====================================
 
+Install-Module Az -Force -AllowClobber
+
 Connect-AzAccount -SubscriptionId adf7b698-fc97-47a3-bd56-6993765abbba
 Get-Az 
 Get-AzContext  (To check which subscription you have logged in currently
