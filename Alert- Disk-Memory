@@ -17,6 +17,7 @@ exit 0
 academia@erpliveapp:~$ sudo cat /root/hddalert.sh
 #!/bin/bash
 CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
+#CURRENT=$(df -h / | awk '{print $5}'|egrep -v "Use" |sed 's/%//gi')
 THRESHOLD=95
 if [ "$CURRENT" -gt "$THRESHOLD" ] ; then
 mail -s 'Disk Space Alert' build@serosoft.in << EOF
