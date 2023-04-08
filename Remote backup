@@ -20,3 +20,20 @@ Crontab –e
 
 
 
+====================
+
+#!/bin/bash
+
+#count=$(df -h / | awk '{print $5}'|egrep -v "Use" |sed 's/%//gi')
+for i in `cat /root/hostname`;
+do
+
+CPULOAD=$(ssh $i df -h / | awk '{print $5}'|egrep -v "Use" |sed 's/%//gi')
+
+echo "$CPULOAD" >> /root/cpudetails
+
+FREE=$(ssh $i "bash -s" < /root/./free.sh)
+
+echo "$FREE" >> /root/freemem
+
+done
