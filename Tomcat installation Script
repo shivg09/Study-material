@@ -1,0 +1,30 @@
+
+root@ip-172-31-35-248:~# cat cpu.sh
+#!/bin/bash
+
+#count=$(df -h / | awk '{print $5}'|egrep -v "Use" |sed 's/%//gi')
+for i in `cat /root/hostname`;
+do
+
+CPULOAD=$(ssh $i df -h / | awk '{print $5}'|egrep -v "Use" |sed 's/%//gi')
+
+echo "$CPULOAD" >> /root/cpudetails
+
+FREE=$(ssh $i "bash -s" < /root/./free.sh)
+
+echo "$FREE" >> /root/freemem
+TOMCAT=$(ssh $i "bash -s"  < /root/./tomcat.sh)
+
+done
+
+root@ip-172-31-35-248:~#
+root@ip-172-31-35-248:~#
+root@ip-172-31-35-248:~#
+root@ip-172-31-35-248:~# cat tomcat.sh
+#!/bin/bash
+apt-get install wget
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+tar -xvzf apache-tomcat-9.0.73.tar.gz
+rm -rf apache-tomcat-9.0.73.tar.gz
+mv apache-tomcat-9.0.73 /opt/
+root@ip-172-31-35-248:~#
