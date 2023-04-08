@@ -25,3 +25,11 @@ RMEMUSAGE=$(ssh $i free |grep Mem |awk '{print $2}')
 
 echo "$RHOSTNAME","$RDATE", "$RCPUUSAGE","$RMEMUSAGE","$RDISKUSEGE" >> /opt/cpu
 done
+
+
+=================
+Output of ls command
+#!/bin/bash
+echo "Welcome school"
+echo 'shiv'
+echo "$(ls)"
