@@ -33,3 +33,17 @@ Output of ls command
 echo "Welcome school"
 echo 'shiv'
 echo "$(ls)"
+
+
+===============
+
+root@ip-172-31-35-248:~# cat inventory.sh
+#!/bin/bash
+server_name=$("hostname")
+UP_time=$(uptime |awk '{print $3}')
+IP_Address=$(ifconfig |grep inet |awk 'NR==1{print $2}')
+echo "$server_name"
+echo "$IP_Address"
+echo "$UP_time"
+
+echo "1.$server_name,$UP_time,$IP_Address" >> /root/a2.csv
