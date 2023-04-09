@@ -1,0 +1,8 @@
+to print 3 section
+cat /etc/passwd |awk -F ':' '{print $3}'
+cat /etc/passwd |cut -c 2-5
+cat /etc/passwd |cut -c 2,5
+cat /etc/passwd |cut -d ":" -f2
+
+cat /etc/passwd |cut -c 3-7,11
+cat /etc/passwd |cut -c 3-  (from 3rd charater to end of the line)
