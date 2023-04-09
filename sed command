@@ -142,3 +142,10 @@ Delete the empty line
   sed -n '/^that/p' test 
 =================
 sed -n '/^\./p' test
+
+============
+ls -la |grep "\."
+==========================
+ sed -n '/\./p' test
+
+
