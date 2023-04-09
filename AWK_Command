@@ -10,3 +10,5 @@ cat /etc/passwd |cut -c 3-  (from 3rd charater to end of the line)
  cat /etc/passwd |cut -d ":" -f2,3
  cat /etc/passwd |cut -d ":" -f2,3 --output-delimiter=""
 
+ cat /etc/passwd |cut -d ":" -f2,3 --output-delimiter="--"
+ 
