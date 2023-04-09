@@ -132,4 +132,13 @@ worlday is a big company
 root@ip-172-31-40-0:~# sed -n '/^that/p' test
 that is my pen
 root@ip-172-31-40-0:~#
+===================
+
+Delete the empty line
+
+ sed -i '/^$/d' testfile
+ ===============
+ Print the work start with that
+  sed -n '/^that/p' test 
+=================
 
