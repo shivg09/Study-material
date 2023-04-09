@@ -94,3 +94,20 @@ sed -n '2p' file2
 
 ============
 cat file2 |awk 'NR==2{print}'  (to print 2nd line from the file2
+
+
+===============
+Pattern matching
+root@ip-172-31-35-85:~/script# cat file2
+my name is
+my siername is
+who are put
+this is pot
+this is shell script
+this is phell script
+my file is not empty
+
+root@ip-172-31-35-85:~/script# sed -n '/p[uo]t/p' file2
+who are put
+this is pot
+root@ip-172-31-35-85:~/script#
