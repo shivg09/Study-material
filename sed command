@@ -88,3 +88,4 @@ print 2nd file from the fille2
 sed -n '2p' file2
 
 ============
+cat file2 |awk 'NR==2{print}'  (to print 2nd line from the file2
