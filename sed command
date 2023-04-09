@@ -151,3 +151,6 @@ ls -la |grep "\."
 ==============
  sed -n '/p[uok]t/p' test
  
+ =============
+  egrep  "small|book" test
+==============
