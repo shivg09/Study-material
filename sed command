@@ -111,3 +111,25 @@ root@ip-172-31-35-85:~/script# sed -n '/p[uo]t/p' file2
 who are put
 this is pot
 root@ip-172-31-35-85:~/script#
+
+
+=====================
+
+
+root@ip-172-31-40-0:~# cat test
+this is my book
+that is my pen
+serosoft is a small company
+worlday is a big company
+
+root@ip-172-31-40-0:~#
+root@ip-172-31-40-0:~#
+root@ip-172-31-40-0:~#
+root@ip-172-31-40-0:~#
+root@ip-172-31-40-0:~# sed -n '/company$/p' test
+serosoft is a small company
+worlday is a big company
+root@ip-172-31-40-0:~# sed -n '/^that/p' test
+that is my pen
+root@ip-172-31-40-0:~#
+
