@@ -83,3 +83,8 @@ Mayank~#sed '2d' test.txt
 4 raj 45000
 
 Mayank~#
+======================
+print 2nd file from the fille2
+sed -n '2p' file2
+
+============
