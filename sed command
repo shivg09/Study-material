@@ -1,3 +1,8 @@
+Narendra shell script link
+https://www.youtube.com/watch?v=Zzd9tarN3Lg&list=PL2qzCKTbjutJRM7K_hhNyvf8sfGCLklXw
+https://www.youtube.com/watch?v=Zzd9tarN3Lg&list=PL2qzCKTbjutJRM7K_hhNyvf8sfGCLklXw
+
+
 (Agar first record ke pahle record insert karna hai to below command)
 Mayank~#sed '1i S.No Name Salary' test.txt
 S.No Name Salary
