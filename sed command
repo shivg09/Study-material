@@ -1,3 +1,4 @@
+(Agar first record ke pahle record insert karna hai to below command)
 Mayank~#sed '1i S.No Name Salary' test.txt
 S.No Name Salary
 1 ramy 8000
@@ -11,6 +12,9 @@ S.No Name Salary
 2 vijay 6000
 3  kamal 4000
 4 raj 45000
+==========================================
+
+(Agar first record ke baad record insert karna hai to below command)
 
 Mayank~#sed '1a '-------------' test.txt
 > ^C
@@ -36,7 +40,8 @@ Mayank~#sed '/ramy/i 0 monika 9888' test.txt
 2 vijay 6000
 3  kamal 4000
 4 raj 45000
-
+========================================
+(Agar ramy wale record ke baad record insert karna hai to below command)
 Mayank~#sed '/ramy/a 4 raj 45000' test.txt
 1 ramy 8000
 4 raj 45000
@@ -50,14 +55,16 @@ Mayank~#sed '/raj/a 4 mkuesh 45000' test.txt
 3  kamal 4000
 4 raj 45000
 4 mkuesh 45000
-
+================================
+(Agar raj wala record delete karna hai to below command)
 Mayank~#sed '/raj/d' test.txt
 1 ramy 8000
 2 vijay 6000
 3  kamal 4000
 
-Mayank~#sed '/2d' test.txt
-sed: -e expression #1, char 3: unterminated address regex
+===============================
+(Agar 2nd line delete karna hai to below command)
+
 Mayank~#sed '2d' test.txt
 1 ramy 8000
 3  kamal 4000
