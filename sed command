@@ -141,4 +141,4 @@ Delete the empty line
  Print the work start with that
   sed -n '/^that/p' test 
 =================
-
+sed -n '/^\./p' test
