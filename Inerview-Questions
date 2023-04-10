@@ -93,6 +93,7 @@ then the device will show in enpoint.microsoft.com portal
 IP IPSectunnel   protocol using
 
 DR - RPO and RTO
+RTO is how quickly the applications will be online in the secondary site, and RPO is how much data loss would occur in the event of a failover
 ==
 gitbase & merge
 git fetch and pull different
