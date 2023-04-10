@@ -99,5 +99,14 @@ gitbase & merge
 git fetch and pull different
 -============
 Availability set and avaiability zone diffrent
+Availability zone = one or more datacenters()
+What is an Azure availability zone? Azure availability zones are physically and logically separated datacenters with their own independent power source, network, and cooling.
+
+An availability set is a logical grouping of VMs that allows Azure to understand how your application is built to provide for redundancy and availability. 
+
+ HDDs are traditional storage devices with spinning platters that read and write data. SSDs use newer technology that stores data on instantly accessible memory chips. SSDs are faster, quieter, smaller, consume less energy, and more durable
+
+A data center’s servers are separated into several physical and logical groupings. The logical grouping is known as the Update Domain, while the physical grouping is known as the Fault Domain.
+
 
 
