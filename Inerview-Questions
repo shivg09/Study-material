@@ -32,8 +32,11 @@ Inode
 in a linux every file has data structure which container the file infromation like owner/group id / user id/ size and permission/ type of file. 
 and that data structure has perticular unique number called inode number. that data structure contain the medeta data information. 
 check the inode number using 
+Below are the command to check indoe details
 ls -i 
 dh -ih 
+find /path/to/directory -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n
+
 -------------
 
 how to find perticuler line or word in remote server
