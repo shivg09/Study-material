@@ -116,4 +116,5 @@ A data center’s servers are separated into several physical and logical groupi
 
 https://petri.com/comparing-basic-standard-azure-load-balancers/
 
+The Basic tier is limited to 100 instances but the Standard tier can scale out to 1000 instances (matching a virtual machine scale set
 
