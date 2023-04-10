@@ -51,6 +51,7 @@ ansible service status check
 terraform import resourcename.rg. ID
 
 terraform hdd increase
+We will increase the os_disk_size in main.tf and will run again apply then server will reboot and disk will be increased without data loss
 
 shell script to install nginx in multiple servers
 ===============
