@@ -112,4 +112,8 @@ An availability set is a logical grouping of VMs that allows Azure to understand
 A data center’s servers are separated into several physical and logical groupings. The logical grouping is known as the Update Domain, while the physical grouping is known as the Fault Domain.
 
 
+==============
+
+https://petri.com/comparing-basic-standard-azure-load-balancers/
+
 
