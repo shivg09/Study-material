@@ -1,0 +1,26 @@
+ansible vault working file
+https://www.youtube.com/watch?v=mGUs9rOH7NA
+
+
+ansadmin@vm1:~$ ansible-vault view pass1.yml
+Vault password: 
+username: admin
+password: "$6$8JqN0ZVXnsIEUnuQ$Z7uT3IplaJLiNfH5o2lkNhDcWhtTTZ/YkepZbCkruVBhbFgI09XsO.yeSc9NvcUqTi6h98l0sa0CTnEfEnK7Q1"
+ansadmin@vm1:~$ 
+
+========
+ansadmin@vm1:~$ cat useradd_vault.yml 
+---
+- name: Vault file
+  hosts: all
+  become: true
+  vars_files:
+     - pass1.yml
+  tasks:
+    - name: Add user
+      user:
+        name: "{{ username }}"
+        password: "{{ password |  password_hash('sha256') }}"
+
+==
+ansible-playbook useradd_vault.yml --ask-vault-pass --ask-become-pass
