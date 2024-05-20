@@ -13,3 +13,59 @@ EXPOSE 4000
 CMD [ "node", "index.js" ]
 
 ===========
+# Generating the custom package-docker.json to overcome reinstallations of nodemodule on package version change
+FROM node:20.9.0-alpine3.18 as transform
+WORKDIR /usr/src/app
+COPY transformPackageJson.js transformPackageJson.js 
+COPY package.json package.json
+RUN node transformPackageJson.js
+
+FROM node:20.9.0-alpine3.18
+
+#npm auth token for private repositories 
+ARG NPM_AUTH_TOKEN
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY .npmrc ./
+
+# Install app dependencies
+COPY --from=transform /usr/src/app/package-docker.json package.json
+
+ARG IN_PLATFORM_VERSION
+RUN echo ${IN_PLATFORM_VERSION} > platform-version.txt
+
+RUN apk update && apk upgrade \
+    && apk add --update \
+    python3 \
+    && apk add build-base  \
+    && rm -rf /var/cache/apk/* \
+    && npm install && mv node_modules ../node_modules && ln -s ../node_modules node_modules \
+    && npm cache clean --force \
+    && apk del python3 \
+    && apk del build-base
+
+# Copy projct files
+COPY . .
+
+RUN npm run build
+
+# Remove source code 
+RUN rm -rf ./src && rm tsconfig.json
+RUN rm -rf ./.npmrc
+EXPOSE 4020
+
+#Create a group and user
+#RUN addgroup -S system && adduser -S inteliuser -G system
+ 
+#Create data directory
+RUN mkdir -p /usr/src/app/data
+ 
+#Change permissions 
+RUN chmod ugo+rwx /usr/src/app/* /usr/src/app/Keys/*
+ 
+#Tell docker that all future commands should run as the respected user
+USER node 
+
+CMD [ "node" , "./build/server.js" ]
