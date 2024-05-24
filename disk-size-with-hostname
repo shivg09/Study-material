@@ -1,0 +1,13 @@
+#df -h / |grep -v "Filesystem" |awk '{print $4}' |sed 's/G//gi'
+hostname='/app/hostdetails'
+file='output.csv'
+threshold=20
+echo "hostname,disksize" > "$file"
+for i in `cat $hostname`;
+do
+hostname=$(ssh $i hostname)
+disksize=$(ssh $i df -h / |grep -v "Filesystem" |awk '{print $4}' |sed 's/G//gi')
+echo "$hostname,$disksize" >> "$file"
+
+done
+~
